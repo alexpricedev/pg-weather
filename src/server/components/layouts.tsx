@@ -5,9 +5,8 @@ import type { User } from "../services/users";
 import { Logo } from "./logo";
 import { Nav } from "./nav";
 
-const SITE_URL = "https://billet.alexprice.dev";
-const SITE_DESCRIPTION =
-  "Full-stack TypeScript starter — designed to be built on by AI coding agents";
+const SITE_URL = "http://localhost:3000";
+const SITE_DESCRIPTION = "A full-stack TypeScript app built with Bun.";
 
 interface LayoutProps {
   title: string;
@@ -82,21 +81,12 @@ export function Layout({
         <header>
           <a href="/" className="logo">
             <Logo />
-            <span>Billet</span>
+            <span>pg-weather</span>
           </a>
           <Nav page={name} user={user} csrfToken={csrfToken} />
         </header>
         <main>{children}</main>
-        <footer>
-          <a href="https://github.com/alexpricedev/Billet">GitHub</a>
-          <span>
-            Built by <a href="https://alexprice.dev">alexprice.dev</a>
-          </span>
-        </footer>
-        <script
-          async
-          src="https://unpkg.com/lottie-web@5/build/player/lottie_light.min.js"
-        />
+        <footer />
         <script type="module" src={getAssetUrl("/assets/main.js")} />
       </body>
     </html>
