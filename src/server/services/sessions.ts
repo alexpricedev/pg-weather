@@ -5,7 +5,7 @@ import {
   type DatabaseMutationResult,
   hasAffectedRows,
 } from "../utils/database";
-import type { User } from "./auth";
+import { coerceNullableNumeric, type User, type WindSpeedUnit } from "./auth";
 import { db } from "./database";
 
 export type SessionType = "guest" | "authenticated";
@@ -85,7 +85,10 @@ export const getSessionContextFromDB = async (
       SELECT
         s.id_hash, s.user_id, s.session_type,
         s.expires_at, s.last_activity_at, s.created_at,
-        u.id as user_id_result, u.email, u.role, u.created_at as user_created_at
+        u.id as user_id_result, u.email, u.role, u.wind_speed_unit,
+        u.min_wind_speed_kph, u.max_wind_speed_kph,
+        u.min_wind_gust_kph, u.max_wind_gust_kph,
+        u.created_at as user_created_at
       FROM sessions s
       LEFT JOIN users u ON s.user_id = u.id
       WHERE s.id_hash = ${sessionIdHash}
@@ -104,6 +107,11 @@ export const getSessionContextFromDB = async (
       user_id_result: string | null;
       email: string | null;
       role: "user" | "admin" | null;
+      wind_speed_unit: WindSpeedUnit | null;
+      min_wind_speed_kph: unknown;
+      max_wind_speed_kph: unknown;
+      min_wind_gust_kph: unknown;
+      max_wind_gust_kph: unknown;
       user_created_at: string | null;
     };
 
@@ -114,6 +122,11 @@ export const getSessionContextFromDB = async (
           id: data.user_id_result as string,
           email: data.email as string,
           role: (data.role as "user" | "admin") ?? "user",
+          wind_speed_unit: data.wind_speed_unit ?? "kph",
+          min_wind_speed_kph: coerceNullableNumeric(data.min_wind_speed_kph),
+          max_wind_speed_kph: coerceNullableNumeric(data.max_wind_speed_kph),
+          min_wind_gust_kph: coerceNullableNumeric(data.min_wind_gust_kph),
+          max_wind_gust_kph: coerceNullableNumeric(data.max_wind_gust_kph),
           created_at: new Date(data.user_created_at as string),
         }
       : null;

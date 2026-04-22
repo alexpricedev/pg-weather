@@ -4,6 +4,8 @@
 @import "./pages/projects.css";
 @import "./pages/login.css";
 @import "./pages/admin.css";
+@import "./pages/sites.css";
+@import "./pages/settings.css";
 
 /* Component styles */
 @import "./components/layout.css";
@@ -12,26 +14,36 @@
 @import "./components/form-field.css";
 @import "./components/data-table.css";
 @import "./components/badge.css";
+@import "./components/compass-rose.css";
 
 :root {
-  --color-bg: #0a0a0b;
-  --color-surface: #141415;
-  --color-surface-hover: #1c1c1e;
-  --color-border: #222224;
-  --color-text: #ededef;
-  --color-text-secondary: #b4b5b9;
-  --color-text-tertiary: #8a8b8e;
-  --color-text-quaternary: #5c5d60;
-  --color-primary: #7c85f0;
-  --color-primary-hover: #9098f3;
-  --color-success: #34d399;
-  --color-danger: #f87171;
-  --color-warning: #fbbf24;
+  --color-bg: #fafafa;
+  --color-surface: #ffffff;
+  --color-surface-hover: #f4f4f5;
+  --color-border: #e4e4e7;
+  --color-border-strong: #d4d4d8;
+  --color-text: #18181b;
+  --color-text-secondary: #3f3f46;
+  --color-text-tertiary: #71717a;
+  --color-text-quaternary: #a1a1aa;
+  --color-primary: #2563eb;
+  --color-primary-hover: #1d4ed8;
+  --color-primary-soft: #dbeafe;
+  --color-success: #16a34a;
+  --color-success-soft: #dcfce7;
+  --color-danger: #dc2626;
+  --color-danger-soft: #fee2e2;
+  --color-warning: #d97706;
+  --color-warning-soft: #fef3c7;
+  --color-accent: #0ea5e9;
+  --color-accent-soft: #e0f2fe;
   --font-main: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica,
     Arial, sans-serif;
   --font-mono: "SF Mono", "Fira Code", "Fira Mono", Menlo, monospace;
   --radius: 0.5rem;
-  --shadow: none;
+  --radius-sm: 0.375rem;
+  --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.04);
+  --shadow: 0 1px 3px 0 rgb(0 0 0 / 0.06), 0 1px 2px -1px rgb(0 0 0 / 0.04);
 }
 
 html {
@@ -121,45 +133,106 @@ img {
   background: var(--color-surface);
   border: 1px solid var(--color-border);
   border-radius: var(--radius);
-  display: inline-block;
-  margin-bottom: 2rem;
-  padding: 24px;
+  box-shadow: var(--shadow-sm);
+  display: block;
+  margin-bottom: 1.5rem;
+  padding: 1.5rem;
   width: 100%;
 }
 
-.btn-ghost {
-  background: transparent;
-  border: 1px solid var(--color-border);
-  color: var(--color-text-secondary);
+.btn-primary {
+  background: var(--color-primary);
+  border: 1px solid var(--color-primary);
+  border-radius: var(--radius);
+  color: #fff;
+  cursor: pointer;
+  display: inline-block;
+  font-family: inherit;
+  font-size: 14px;
+  font-weight: 500;
+  padding: 8px 16px;
+  text-decoration: none;
+  transition: background 150ms ease;
+}
 
-  &:hover,
-  &:focus {
-    background: var(--color-surface);
-    color: var(--color-text);
-  }
+.btn-primary:hover,
+.btn-primary:focus {
+  background: var(--color-primary-hover);
+  border-color: var(--color-primary-hover);
+  color: #fff;
+  text-decoration: none;
+}
+
+.btn-ghost {
+  background: var(--color-surface);
+  border: 1px solid var(--color-border-strong);
+  border-radius: var(--radius);
+  color: var(--color-text-secondary);
+  cursor: pointer;
+  display: inline-block;
+  font-family: inherit;
+  font-size: 14px;
+  font-weight: 500;
+  padding: 8px 16px;
+  text-decoration: none;
+  transition:
+    background 150ms ease,
+    border-color 150ms ease,
+    color 150ms ease;
+}
+
+.btn-ghost:hover,
+.btn-ghost:focus {
+  background: var(--color-surface-hover);
+  border-color: var(--color-text-tertiary);
+  color: var(--color-text);
+  text-decoration: none;
 }
 
 .btn-danger {
-  background: transparent;
+  background: var(--color-surface);
+  border: 1px solid var(--color-danger-soft);
   color: var(--color-danger);
 
   &:hover,
   &:focus {
-    background: rgba(248, 113, 113, 0.1);
+    background: var(--color-danger-soft);
+    border-color: var(--color-danger);
   }
+}
+
+.page-header {
+  align-items: flex-start;
+  display: flex;
+  gap: 1rem;
+  justify-content: space-between;
+  margin-bottom: 1.5rem;
+}
+
+.breadcrumb {
+  font-size: 0.875rem;
+  margin: 0 0 0.5rem 0;
+}
+
+.field-error {
+  color: var(--color-danger);
+  font-size: 0.8125rem;
+  margin: 0.25rem 0 0 0;
 }
 
 input,
 textarea,
 select {
   background: var(--color-surface);
-  border: 1px solid var(--color-border);
-  border-radius: var(--radius);
+  border: 1px solid var(--color-border-strong);
+  border-radius: var(--radius-sm);
   color: var(--color-text);
   font-family: inherit;
   font-size: 14px;
   padding: 8px 12px;
-  transition: border-color 150ms ease;
+  transition:
+    border-color 150ms ease,
+    box-shadow 150ms ease;
 
   &::placeholder {
     color: var(--color-text-quaternary);
@@ -167,6 +240,7 @@ select {
 
   &:focus {
     border-color: var(--color-primary);
+    box-shadow: 0 0 0 3px var(--color-primary-soft);
     outline: none;
   }
 }
