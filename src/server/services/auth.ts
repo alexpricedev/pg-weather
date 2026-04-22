@@ -3,12 +3,49 @@ import { computeHMAC, generateSecureToken } from "../utils/crypto";
 import { db } from "./database";
 import { createAuthenticatedSession, deleteSession } from "./sessions";
 
+export type WindSpeedUnit = "kph" | "mph";
+
 export interface User {
   id: string;
   email: string;
   role: "user" | "admin";
+  wind_speed_unit: WindSpeedUnit;
+  min_wind_speed_kph: number | null;
+  max_wind_speed_kph: number | null;
+  min_wind_gust_kph: number | null;
+  max_wind_gust_kph: number | null;
   created_at: Date;
 }
+
+export const coerceNullableNumeric = (value: unknown): number | null => {
+  if (value === null || value === undefined) return null;
+  const n = Number(value);
+  return Number.isFinite(n) ? n : null;
+};
+
+interface UserRow {
+  id: string;
+  email: string;
+  role: "user" | "admin";
+  wind_speed_unit: WindSpeedUnit;
+  min_wind_speed_kph: unknown;
+  max_wind_speed_kph: unknown;
+  min_wind_gust_kph: unknown;
+  max_wind_gust_kph: unknown;
+  created_at: Date | string;
+}
+
+export const toUser = (row: UserRow): User => ({
+  id: row.id,
+  email: row.email,
+  role: row.role,
+  wind_speed_unit: row.wind_speed_unit,
+  min_wind_speed_kph: coerceNullableNumeric(row.min_wind_speed_kph),
+  max_wind_speed_kph: coerceNullableNumeric(row.max_wind_speed_kph),
+  min_wind_gust_kph: coerceNullableNumeric(row.min_wind_gust_kph),
+  max_wind_gust_kph: coerceNullableNumeric(row.max_wind_gust_kph),
+  created_at: new Date(row.created_at),
+});
 
 export interface UserToken {
   id: string;
@@ -33,13 +70,16 @@ export const findOrCreateUser = async (email: string): Promise<User> => {
 
   // First try to find existing user
   const existing = await db`
-    SELECT id, email, role, created_at
+    SELECT id, email, role, wind_speed_unit,
+           min_wind_speed_kph, max_wind_speed_kph,
+           min_wind_gust_kph, max_wind_gust_kph,
+           created_at
     FROM users
     WHERE email = ${normalizedEmail}
   `;
 
   if (existing.length > 0) {
-    return existing[0] as User;
+    return toUser(existing[0] as UserRow);
   }
 
   // Create new user if not found
@@ -47,10 +87,13 @@ export const findOrCreateUser = async (email: string): Promise<User> => {
   const newUser = await db`
     INSERT INTO users (id, email)
     VALUES (${userId}, ${normalizedEmail})
-    RETURNING id, email, role, created_at
+    RETURNING id, email, role, wind_speed_unit,
+              min_wind_speed_kph, max_wind_speed_kph,
+              min_wind_gust_kph, max_wind_gust_kph,
+              created_at
   `;
 
-  return newUser[0] as User;
+  return toUser(newUser[0] as UserRow);
 };
 
 /**
@@ -117,7 +160,10 @@ export const verifyMagicLink = async (
   };
 
   const userResults = await db`
-    SELECT id, email, role, created_at
+    SELECT id, email, role, wind_speed_unit,
+           min_wind_speed_kph, max_wind_speed_kph,
+           min_wind_gust_kph, max_wind_gust_kph,
+           created_at
     FROM users
     WHERE id = ${tokenData.user_id}
   `;
@@ -126,25 +172,13 @@ export const verifyMagicLink = async (
     return { success: false, error: "User not found" };
   }
 
-  const userData = userResults[0] as {
-    id: string;
-    email: string;
-    role: "user" | "admin";
-    created_at: string;
-  };
-
   // Always create a fresh session to prevent session fixation attacks
   if (guestSessionId) {
     await deleteSession(guestSessionId);
   }
   const sessionId = await createAuthenticatedSession(tokenData.user_id);
 
-  const user: User = {
-    id: userData.id,
-    email: userData.email,
-    role: userData.role,
-    created_at: new Date(userData.created_at),
-  };
+  const user = toUser(userResults[0] as UserRow);
 
   return { success: true, user, sessionId };
 };

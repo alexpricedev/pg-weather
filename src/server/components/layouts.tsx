@@ -24,7 +24,7 @@ export function Layout({
   csrfToken,
 }: LayoutProps) {
   return (
-    <html lang="en" style={{ colorScheme: "dark" }}>
+    <html lang="en" style={{ colorScheme: "light" }}>
       <head>
         <meta charSet="utf-8" />
         <meta
@@ -100,7 +100,7 @@ interface BaseLayoutProps {
 
 export function BaseLayout({ title, children }: BaseLayoutProps) {
   return (
-    <html lang="en" style={{ colorScheme: "dark" }}>
+    <html lang="en" style={{ colorScheme: "light" }}>
       <head>
         <meta charSet="utf-8" />
         <meta

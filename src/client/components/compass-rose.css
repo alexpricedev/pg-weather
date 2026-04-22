@@ -1,0 +1,37 @@
+.compass-rose {
+  display: block;
+}
+
+.compass-rose-circle {
+  fill: var(--color-surface);
+  stroke: var(--color-border-strong);
+  stroke-width: 0.75;
+}
+
+.compass-rose-arc {
+  fill: var(--color-accent-soft);
+  stroke: var(--color-accent);
+  stroke-width: 0.5;
+  opacity: 0.95;
+}
+
+.compass-rose-label {
+  fill: var(--color-text-secondary);
+  font-family: var(--font-main);
+  font-size: 6px;
+  font-weight: 600;
+}
+
+.compass-rose-arrow line {
+  stroke: var(--color-text);
+  stroke-width: 1.5;
+  stroke-linecap: round;
+}
+
+.compass-rose-arrow polygon {
+  fill: var(--color-text);
+}
+
+.compass-rose-centre {
+  fill: var(--color-text);
+}
