@@ -1,18 +1,20 @@
 .badge {
-  font-size: 12px;
-  font-weight: 500;
-  border-radius: 9999px;
-  display: inline-flex;
   align-items: center;
-  padding: 2px 8px;
+  border-radius: var(--radius-sm);
+  display: inline-flex;
+  font-size: 10.5px;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  padding: 3px 8px;
+  text-transform: uppercase;
 }
 
 .badge-admin {
-  background: rgba(124, 133, 240, 0.12);
-  color: var(--color-primary);
+  background: var(--accent-soft);
+  color: var(--accent);
 }
 
 .badge-user {
-  background: var(--color-surface-hover);
-  color: var(--color-text-quaternary);
+  background: var(--soon-soft);
+  color: var(--text-muted);
 }

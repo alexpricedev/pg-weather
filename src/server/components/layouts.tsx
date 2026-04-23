@@ -60,6 +60,15 @@ export function Layout({
           href="/favicon-16x16.png"
         />
         <link rel="manifest" href="/site.webmanifest" />
+        <link
+          rel="preconnect"
+          href="https://api.fontshare.com"
+          crossOrigin=""
+        />
+        <link
+          rel="stylesheet"
+          href="https://api.fontshare.com/v2/css?f[]=satoshi@300,400,500,700,900&display=swap"
+        />
         <link rel="stylesheet" href={getAssetUrl("/assets/main.css")} />
         <script
           type="importmap"
@@ -126,6 +135,15 @@ export function BaseLayout({ title, children }: BaseLayoutProps) {
           href="/favicon-16x16.png"
         />
         <link rel="manifest" href="/site.webmanifest" />
+        <link
+          rel="preconnect"
+          href="https://api.fontshare.com"
+          crossOrigin=""
+        />
+        <link
+          rel="stylesheet"
+          href="https://api.fontshare.com/v2/css?f[]=satoshi@300,400,500,700,900&display=swap"
+        />
         <link rel="stylesheet" href={getAssetUrl("/assets/main.css")} />
       </head>
       <body>{children}</body>
