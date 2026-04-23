@@ -1,9 +1,9 @@
 [data-page="forms"] {
   .forms-layout {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 2rem;
     align-items: start;
+    display: grid;
+    gap: var(--s-6);
+    grid-template-columns: 1fr 1fr;
 
     @media (width <= 768px) {
       grid-template-columns: 1fr;
@@ -17,44 +17,52 @@
   form {
     display: flex;
     flex-direction: column;
-    gap: 1.25rem;
+    gap: var(--s-4);
   }
 
   .how-it-works {
     h2 {
-      margin-bottom: 1.25rem;
+      margin-bottom: var(--s-4);
     }
   }
 
   .steps {
     display: flex;
     flex-direction: column;
-    gap: 1.5rem;
+    gap: var(--s-5);
   }
 
   .step {
-    display: flex;
-    gap: 1rem;
     align-items: flex-start;
+    display: flex;
+    gap: var(--s-4);
 
     h3 {
       font-size: 15px;
       font-weight: 600;
-      margin-bottom: 0.25rem;
+      letter-spacing: -0.01em;
+      margin-bottom: var(--s-1);
     }
 
     p {
+      color: var(--text-muted);
       font-size: 14px;
       line-height: 1.6;
       margin: 0;
     }
 
     code {
-      background: var(--color-surface);
-      border: 1px solid var(--color-border);
-      border-radius: var(--radius);
-      color: var(--color-text-secondary);
-      font-family: var(--font-mono);
+      background: var(--surface-hover);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-sm);
+      color: var(--text);
+      font-family: var(
+        --font-mono,
+        ui-monospace,
+        SFMono-Regular,
+        Menlo,
+        monospace
+      );
       font-size: 12px;
       padding: 1px 5px;
     }
@@ -62,15 +70,18 @@
 
   .step-num {
     align-items: center;
-    border: 1px solid color-mix(in srgb, var(--color-primary) 30%, transparent);
+    background: var(--accent-tint);
+    border: 1px solid color-mix(in srgb, var(--accent) 25%, transparent);
     border-radius: 50%;
-    color: var(--color-primary);
+    color: var(--accent);
     display: flex;
     flex-shrink: 0;
-    font-size: 13px;
-    font-weight: 600;
-    height: 28px;
+    font-feature-settings: "tnum";
+    font-size: 12px;
+    font-variant-numeric: tabular-nums;
+    font-weight: 700;
+    height: 26px;
     justify-content: center;
-    width: 28px;
+    width: 26px;
   }
 }

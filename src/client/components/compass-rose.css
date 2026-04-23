@@ -3,35 +3,50 @@
 }
 
 .compass-rose-circle {
-  fill: var(--color-surface);
-  stroke: var(--color-border-strong);
-  stroke-width: 0.75;
+  fill: transparent;
+  stroke: var(--border-strong);
+  stroke-width: 0.8;
 }
 
 .compass-rose-arc {
-  fill: var(--color-accent-soft);
-  stroke: var(--color-accent);
-  stroke-width: 0.5;
-  opacity: 0.95;
+  fill: var(--accent);
+  fill-opacity: 0.12;
+  stroke: var(--accent);
+  stroke-width: 0.6;
 }
 
 .compass-rose-label {
-  fill: var(--color-text-secondary);
-  font-family: var(--font-main);
+  fill: var(--text-muted);
+  font-family: var(--font);
   font-size: 6px;
   font-weight: 600;
+  letter-spacing: 0.06em;
 }
 
 .compass-rose-arrow line {
-  stroke: var(--color-text);
-  stroke-width: 1.5;
+  stroke: var(--accent);
   stroke-linecap: round;
+  stroke-width: 1.8;
+  transition: stroke 150ms ease;
 }
 
 .compass-rose-arrow polygon {
-  fill: var(--color-text);
+  fill: var(--accent);
+  transition: fill 150ms ease;
 }
 
 .compass-rose-centre {
-  fill: var(--color-text);
+  fill: var(--accent);
+}
+
+/* When the wind is outside the accepted arcs, colour the arrow terracotta
+   so colour isn't the sole signal but does reinforce the forecast state. */
+.compass-rose.is-off .compass-rose-arrow line,
+.compass-rose.is-off .compass-rose-centre {
+  stroke: var(--off);
+}
+
+.compass-rose.is-off .compass-rose-arrow polygon,
+.compass-rose.is-off .compass-rose-centre {
+  fill: var(--off);
 }

@@ -1,70 +1,81 @@
 [data-component="layout"] {
   & > header {
     align-items: center;
-    background: var(--color-bg);
-    border-bottom: 1px solid var(--color-border);
+    background: color-mix(in oklab, var(--bg) 88%, transparent);
+    backdrop-filter: saturate(1.2) blur(8px);
+    -webkit-backdrop-filter: saturate(1.2) blur(8px);
+    border-bottom: 1px solid var(--border);
     display: flex;
     justify-content: space-between;
-    padding: 0.75rem 2rem;
+    padding: var(--s-3) var(--s-5);
+    position: sticky;
+    top: 0;
+    z-index: 10;
 
     @media (width <= 640px) {
-      padding: 0.75rem 1rem;
+      padding: var(--s-3) var(--s-4);
     }
 
     .logo {
       align-items: center;
+      color: var(--text);
       display: flex;
-      gap: 0.5rem;
+      gap: var(--s-2);
       text-decoration: none;
 
       svg {
-        width: 22px;
-        height: 22px;
+        color: var(--accent);
+        height: 20px;
+        width: 20px;
       }
 
       span {
-        color: var(--color-text);
-        font-size: 1.125rem;
-
-        font-weight: 600;
-        letter-spacing: -0.01em;
+        color: var(--text);
+        font-size: 15px;
+        font-weight: 700;
+        letter-spacing: -0.015em;
       }
 
       &:hover,
-      &:focus {
+      &:focus-visible {
+        color: var(--text);
         text-decoration: none;
       }
     }
   }
 
   & > main {
-    padding: 2rem;
+    margin: 0 auto;
+    max-width: var(--content-max);
+    padding: var(--s-7) var(--s-5);
 
     @media (width <= 768px) {
-      padding: 1.5rem;
+      padding: var(--s-6) var(--s-4);
     }
 
     @media (width <= 640px) {
-      padding: 1rem;
+      padding: var(--s-5) var(--s-4);
     }
   }
 
   & > footer {
-    border-top: 1px solid var(--color-border);
-    color: var(--color-text-quaternary);
+    border-top: 1px solid var(--border);
+    color: var(--text-dim);
     display: flex;
-    font-size: 13px;
-    gap: 1.5rem;
+    font-size: 12.5px;
+    gap: var(--s-5);
     justify-content: center;
-    padding: 1.5rem 2rem;
+    margin: var(--s-9) auto 0;
+    max-width: var(--content-max);
+    padding: var(--s-5);
   }
 
   & > footer a {
-    color: var(--color-text-quaternary);
+    color: var(--text-dim);
   }
 
   & > footer a:hover,
-  & > footer a:focus {
-    color: var(--color-text-secondary);
+  & > footer a:focus-visible {
+    color: var(--text-muted);
   }
 }
