@@ -147,7 +147,7 @@ export const SiteShow = ({
   const hasWindRange = range.minWindKph !== null || range.maxWindKph !== null;
   return (
     <Layout
-      title={`${site.name} — pg-weather`}
+      title={`${site.name} — Windrose`}
       name="sites"
       user={user}
       csrfToken={csrfToken}

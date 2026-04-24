@@ -4,6 +4,7 @@ This file contains essential context and guidelines for Claude instances working
 
 **Key workflow reminders:**
 
+- The product is called **Windrose**. `pg-weather` is the repository / directory / `package.json` `name` slug only — never use it as a display name in user-facing copy, page titles, README, or marketing.
 - Never try to run the local dev server. The Human is always running it in another tab on port 3000.
 - Always test your work with the /browse skill to confirm it works as expected.
 - This project uses JSX for it's template engine but it is NOT a React (client) project.

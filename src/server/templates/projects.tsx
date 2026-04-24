@@ -23,7 +23,7 @@ export type ProjectsProps = {
 export const Projects = (props: ProjectsProps): JSX.Element => {
   return (
     <Layout
-      title="CRUD - pg-weather"
+      title="CRUD — Windrose"
       name="projects"
       user={props.user}
       csrfToken={props.csrfToken}

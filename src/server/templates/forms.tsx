@@ -25,7 +25,7 @@ export const Forms = ({
   state,
 }: FormsProps) => (
   <Layout
-    title="Forms - pg-weather"
+    title="Forms — Windrose"
     name="forms"
     user={user}
     csrfToken={csrfToken}
