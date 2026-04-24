@@ -6,7 +6,7 @@ import { Logo } from "./logo";
 import { Nav } from "./nav";
 
 const SITE_URL = "http://localhost:3000";
-const SITE_DESCRIPTION = "A full-stack TypeScript app built with Bun.";
+const SITE_DESCRIPTION = "Windrose — the paraglider's morning check.";
 
 interface LayoutProps {
   title: string;
@@ -90,7 +90,7 @@ export function Layout({
         <header>
           <a href="/" className="logo">
             <Logo />
-            <span>pg-weather</span>
+            <span>Windrose</span>
           </a>
           <Nav page={name} user={user} csrfToken={csrfToken} />
         </header>

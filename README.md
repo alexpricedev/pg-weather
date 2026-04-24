@@ -1,6 +1,6 @@
-# pg-weather
+# Windrose
 
-A full-stack TypeScript app built with Bun.
+The paraglider's morning check. Add your flying sites, set the wind arcs that launch them, and see at a glance whether today is flyable.
 
 ---
 
@@ -120,7 +120,7 @@ Contributions are welcome! Please open issues or PRs.
 
 ## Deploy
 
-pg-weather is a single Bun process — no containers, no serverless adapters, no platform-specific runtime. Anywhere you can run `bun run start`, it'll work: Railway, Fly.io, Render, a VPS, or your own machine.
+Windrose is a single Bun process — no containers, no serverless adapters, no platform-specific runtime. Anywhere you can run `bun run start`, it'll work: Railway, Fly.io, Render, a VPS, or your own machine.
 
 ### Railway
 
@@ -145,7 +145,7 @@ A `railway.json` is included with build and start commands pre-configured. Deplo
 
 ### Database
 
-pg-weather uses PostgreSQL through Bun's built-in `Bun.SQL` — no ORM, no driver dependency. Migrations run automatically on server startup — pending migrations are applied before the server accepts requests. If a migration fails, the server won't start (fail-safe).
+Windrose uses PostgreSQL through Bun's built-in `Bun.SQL` — no ORM, no driver dependency. Migrations run automatically on server startup — pending migrations are applied before the server accepts requests. If a migration fails, the server won't start (fail-safe).
 
 A lightweight CLI is also available for manual operations:
 

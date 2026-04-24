@@ -7,9 +7,9 @@ interface HomeProps {
 }
 
 export const Home = ({ user, csrfToken }: HomeProps) => (
-  <Layout title="pg-weather" name="home" user={user} csrfToken={csrfToken}>
+  <Layout title="Windrose" name="home" user={user} csrfToken={csrfToken}>
     <section className="welcome">
-      <h1>pg-weather</h1>
+      <h1>WINDROSE</h1>
       <p className="lead">
         A paraglider's forecast planner. Add your flying sites, set the wind
         arcs that launch, and check each site's hourly forecast for today,

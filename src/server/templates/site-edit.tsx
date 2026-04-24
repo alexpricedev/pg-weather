@@ -38,7 +38,7 @@ export const SiteEdit = ({
 
   return (
     <Layout
-      title={`${title} — pg-weather`}
+      title={`${title} — Windrose`}
       name="sites"
       user={user}
       csrfToken={csrfToken}

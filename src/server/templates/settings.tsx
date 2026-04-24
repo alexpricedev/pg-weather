@@ -46,7 +46,7 @@ export const Settings = ({
   const unitLabel = values.wind_speed_unit;
   return (
     <Layout
-      title="Settings — pg-weather"
+      title="Settings — Windrose"
       name="settings"
       user={user}
       csrfToken={csrfToken}

@@ -14,7 +14,7 @@ export interface LoginProps {
 
 export const Login = ({ state }: LoginProps) => {
   return (
-    <BaseLayout title="Login - pg-weather">
+    <BaseLayout title="Login — Windrose">
       <main className="login-page">
         <div className="login-wrapper">
           <div className="login-header">

@@ -1,8 +1,8 @@
-# Design System — pg-weather
+# Design System — Windrose
 
 ## Product Context
 
-- **What this is:** A paraglider's forecast planner. Add flying sites, set the wind direction arcs that launch each site, and check hourly forecasts for today, tomorrow, and the day after.
+- **What this is:** Windrose is a paraglider's forecast planner. Add flying sites, set the wind direction arcs that launch each site, and check hourly forecasts for today, tomorrow, and the day after.
 - **Who it's for:** Paraglider pilots deciding whether today's weather is flyable — typically checked first thing in the morning, often on a phone, with a driving decision on the line.
 - **Space/industry:** Weather tools for flying — category peers are Windy, XCWeather, Meteoblue, XCTrack, paragliding club sites.
 - **Project type:** Web app (dashboard-style with data-dense forecast tables and interactive instrument-like visuals).
@@ -169,3 +169,4 @@ Small rounded rectangles, weight 600, 10.5px, 0.14em tracking, uppercase. Flyabl
 | 2026-04-23 | First proposal (dark-mode "pilot's instrument" with Instrument Serif + General Sans + amber) rejected | User preferred light mode and a unified geometric sans. Structural decisions (status card as hero, compass as character) carried forward. |
 | 2026-04-23 | Satoshi chosen over Geist for primary family | Same modernist-Swiss energy, less ubiquitous — avoids the Vercel-font convergence trap. |
 | 2026-04-23 | Accent colour: sky `#0369a1` | Domain-literate (aviation/weather), high contrast on white, distinctive without being alarmist. |
+| 2026-04-24 | Renamed `pg-weather` → **Windrose**; "flyable" preserved as the in-product status verb | Working name `pg-weather` did not survive at hero display weight and framed the app as "a weather tool" rather than a site planner with a flyability verdict. Windrose maps 1:1 to the signature compass-rose visual. The brand/verb split (Windrose names the instrument; "flyable" names the state) reinforces both. Direct conflict avoided: `flyable.app` is taken by Rob Holmes' "Flyable: Flying Forecast" Android app in the same niche. See `~/.gstack/projects/alexpricedev-pg-weather/alexprice-alexpricedev-brand-name-design-20260424-071235.md`. |
