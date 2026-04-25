@@ -5,6 +5,7 @@ import { apiRoutes } from "./routes/api";
 import { appRoutes } from "./routes/app";
 import { handleAssetRequest, initAssets } from "./services/assets";
 import { log } from "./services/logger";
+import { getWeatherIconResponse } from "./services/weather-icons";
 import { validateEnv } from "./utils/env";
 
 validateEnv();
@@ -30,6 +31,14 @@ const server = Bun.serve({
       const file = Bun.file(`dist${url.pathname}`);
       if (await file.exists()) return new Response(file);
       return new Response("Asset not found", { status: 404 });
+    }
+
+    if (url.pathname.startsWith("/weather-icons/")) {
+      const slug = url.pathname
+        .slice("/weather-icons/".length)
+        .replace(/\.svg$/, "");
+      const style = url.searchParams.get("style") ?? "line";
+      return getWeatherIconResponse(slug, style);
     }
 
     if (url.pathname.startsWith("/")) {

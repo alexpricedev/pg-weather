@@ -349,6 +349,7 @@
 
 /* Status card — 3px left stripe + icon square + body */
 .status-card {
+  align-items: center;
   background: var(--surface);
   border: 1px solid var(--border);
   border-radius: var(--radius-md);
@@ -489,12 +490,17 @@
   }
 }
 
-.site-show-meta {
+.card.site-show-meta {
   align-items: center;
   display: flex;
   flex-direction: column;
   gap: var(--s-4);
   text-align: center;
+}
+
+.card.site-show-meta .compass-rose {
+  display: block;
+  margin: var(--s-3) auto var(--s-5);
 }
 
 .site-show-wind-now {
@@ -549,10 +555,11 @@
 .site-show-limit dt {
   align-items: center;
   color: var(--text-muted);
-  display: inline-flex;
+  display: flex;
   font-size: 10.5px;
   font-weight: 600;
   gap: var(--s-2);
+  justify-content: space-between;
   letter-spacing: 0.14em;
   text-transform: uppercase;
 }
@@ -637,19 +644,21 @@
 
 .forecast-day-tabs {
   display: flex;
-  gap: 2px;
+  gap: 0;
   margin-bottom: var(--s-3);
   overflow-x: auto;
 }
 
 .forecast-day-tabs a {
   border: 1px solid var(--border);
-  border-radius: var(--radius-sm);
+  border-radius: 0;
   color: var(--text-muted);
   flex: 1;
   font-size: 13px;
   font-weight: 500;
+  margin-left: -1px;
   padding: 10px var(--s-3);
+  position: relative;
   text-align: center;
   text-decoration: none;
   transition:
@@ -659,17 +668,30 @@
   white-space: nowrap;
 }
 
+.forecast-day-tabs a:first-child {
+  border-bottom-left-radius: var(--radius-sm);
+  border-top-left-radius: var(--radius-sm);
+  margin-left: 0;
+}
+
+.forecast-day-tabs a:last-child {
+  border-bottom-right-radius: var(--radius-sm);
+  border-top-right-radius: var(--radius-sm);
+}
+
 .forecast-day-tabs a:hover,
 .forecast-day-tabs a:focus-visible {
   background: var(--surface-hover);
   color: var(--text);
   text-decoration: none;
+  z-index: 1;
 }
 
 .forecast-day-tabs a.active {
   background: var(--surface);
   border-color: var(--accent);
   color: var(--text);
+  z-index: 2;
 }
 
 .forecast-table-wrapper {
@@ -783,9 +805,15 @@
 }
 
 .weather-icon {
-  display: inline-block;
-  font-size: 18px;
-  line-height: 1;
+  color: var(--text);
+  display: inline-flex;
+  vertical-align: middle;
+}
+
+.weather-icon svg {
+  display: block;
+  height: 100%;
+  width: 100%;
 }
 
 .wind-direction {

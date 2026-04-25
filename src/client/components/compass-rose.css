@@ -2,51 +2,114 @@
   display: block;
 }
 
+/* Compact mode — minimal ring used in forecast rows and site cards */
 .compass-rose-circle {
   fill: transparent;
   stroke: var(--border-strong);
   stroke-width: 0.8;
 }
 
+/* Full instrument — bezel + inner ring */
+.compass-rose-bezel {
+  fill: var(--alt-050);
+  stroke: var(--border-strong);
+  stroke-width: 0.5;
+}
+
+.compass-rose-bezel-inner {
+  fill: var(--surface);
+  stroke: var(--border);
+  stroke-width: 0.5;
+}
+
+/* Tick marks — three weights */
+.compass-rose-tick {
+  stroke: var(--alt-400);
+  stroke-linecap: round;
+  stroke-width: 0.35;
+}
+
+.compass-rose-tick.is-major {
+  stroke: var(--alt-700);
+  stroke-width: 0.55;
+}
+
+.compass-rose-tick.is-cardinal {
+  stroke: var(--alt-900);
+  stroke-width: 0.9;
+}
+
+/* Accepted-wind arcs */
 .compass-rose-arc {
   fill: var(--accent);
-  fill-opacity: 0.12;
+  fill-opacity: 0.14;
   stroke: var(--accent);
   stroke-width: 0.6;
 }
 
+/* Cardinal letters — Space Grotesk, instrument-grade */
 .compass-rose-label {
-  fill: var(--text-muted);
-  font-family: var(--font);
-  font-size: 6px;
+  fill: var(--text);
+  font-family: var(--font-display);
+  font-size: 5.5px;
   font-weight: 600;
-  letter-spacing: 0.06em;
+  letter-spacing: -0.02em;
 }
 
-.compass-rose-arrow line {
-  stroke: var(--accent);
-  stroke-linecap: round;
-  stroke-width: 1.8;
-  transition: stroke 150ms ease;
-}
-
-.compass-rose-arrow polygon {
+/* Needle — tapered tip + short tail */
+.compass-rose-needle-tip {
   fill: var(--accent);
   transition: fill 150ms ease;
 }
 
-.compass-rose-centre {
-  fill: var(--accent);
+.compass-rose-needle-tail {
+  fill: var(--alt-700);
+  opacity: 0.55;
+  transition: fill 150ms ease;
 }
 
-/* When the wind is outside the accepted arcs, colour the arrow terracotta
-   so colour isn't the sole signal but does reinforce the forecast state. */
-.compass-rose.is-off .compass-rose-arrow line,
-.compass-rose.is-off .compass-rose-centre {
-  stroke: var(--off);
+/* Hub — dark dot with optional white pinhole */
+.compass-rose-hub {
+  fill: var(--alt-900);
 }
 
-.compass-rose.is-off .compass-rose-arrow polygon,
-.compass-rose.is-off .compass-rose-centre {
+.compass-rose-hub-pin {
+  fill: var(--alt-000);
+}
+
+/* In-arc — wind direction sits inside an accepted arc.
+   Brighten the arc fill and warm the bezel inner ring slightly so the
+   "good wind" verdict reads at a glance. */
+.compass-rose.is-active .compass-rose-arc {
+  fill-opacity: 0.22;
+  stroke-width: 0.85;
+}
+
+.compass-rose.is-active .compass-rose-bezel-inner {
+  fill: var(--accent-tint);
+  stroke: var(--accent);
+  stroke-opacity: 0.35;
+}
+
+/* Off state — wind sits outside accepted arcs.
+   Needle goes terracotta, arc dims so the rejection reads, and the
+   bezel inner ring picks up a warm tint to reinforce the verdict. */
+.compass-rose.is-off .compass-rose-needle-tip {
   fill: var(--off);
+}
+
+.compass-rose.is-off .compass-rose-needle-tail {
+  fill: var(--off);
+  opacity: 0.4;
+}
+
+.compass-rose.is-off .compass-rose-arc {
+  fill-opacity: 0.08;
+  stroke-opacity: 0.55;
+}
+
+.compass-rose.is-off .compass-rose-bezel-inner {
+  fill: var(--off-soft);
+  stroke: var(--off);
+  stroke-opacity: 0.3;
 }

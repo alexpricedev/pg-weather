@@ -1,6 +1,7 @@
 import type { JSX } from "react";
 import { CompassRose } from "../components/compass-rose";
 import { Layout } from "../components/layouts";
+import { WeatherIcon } from "../components/weather-icon";
 import type { ForecastHour } from "../services/open-meteo";
 import type { Site } from "../services/sites";
 import type { User, WindSpeedUnit } from "../services/users";
@@ -40,7 +41,7 @@ export type HeaderStatus =
     };
 
 interface SiteShowProps {
-  user: User;
+  user: User | null;
   csrfToken?: string;
   site: Site;
   forecast:
@@ -55,6 +56,7 @@ interface SiteShowProps {
   windSpeedUnit: WindSpeedUnit;
   headerStatus: HeaderStatus;
   state: SiteShowState;
+  isDemo?: boolean;
 }
 
 const STATUS_VARIANT_CLASS: Record<HeaderStatus["kind"], string> = {
@@ -65,21 +67,30 @@ const STATUS_VARIANT_CLASS: Record<HeaderStatus["kind"], string> = {
   "forecast-error": "is-off",
 };
 
+const Paraglider = (): JSX.Element => (
+  <>
+    <path d="M2 7.4c0-1.6 4.2-2.9 10-2.9s10 1.3 10 2.9v1.4c-2-.9-5.5-1.4-10-1.4s-8 .5-10 1.4V7.4z" />
+    <g
+      stroke="currentColor"
+      strokeWidth="0.7"
+      strokeLinecap="round"
+      fill="none"
+    >
+      <line x1="2.6" y1="8.6" x2="11.4" y2="17" />
+      <line x1="7" y1="7.4" x2="11.7" y2="17" />
+      <line x1="12" y1="7.2" x2="12" y2="17" />
+      <line x1="17" y1="7.4" x2="12.3" y2="17" />
+      <line x1="21.4" y1="8.6" x2="12.6" y2="17" />
+    </g>
+    <circle cx="12" cy="18.6" r="2.2" />
+  </>
+);
+
 const StatusIcon = ({ kind }: { kind: HeaderStatus["kind"] }): JSX.Element => {
   if (kind === "now") {
     return (
-      <svg
-        viewBox="0 0 24 24"
-        fill="none"
-        stroke="currentColor"
-        strokeWidth="2"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-        aria-hidden="true"
-      >
-        <path d="M9.59 4.59A2 2 0 1 1 11 8H2" />
-        <path d="M17.73 7.73A2 2 0 1 1 19.5 11H2" />
-        <path d="M14.59 15.41A2 2 0 1 0 16 19H2" />
+      <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+        <Paraglider />
       </svg>
     );
   }
@@ -89,29 +100,37 @@ const StatusIcon = ({ kind }: { kind: HeaderStatus["kind"] }): JSX.Element => {
         viewBox="0 0 24 24"
         fill="none"
         stroke="currentColor"
-        strokeWidth="2"
+        strokeWidth="1.7"
         strokeLinecap="round"
         strokeLinejoin="round"
         aria-hidden="true"
       >
-        <circle cx="12" cy="12" r="9" />
-        <path d="M12 7v5l3 2" />
+        <circle cx="12" cy="12" r="8.5" />
+        <path d="M12 7.5 V12 L15.5 14" />
       </svg>
     );
   }
   return (
-    <svg
-      viewBox="0 0 24 24"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth="2"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-      aria-hidden="true"
-    >
-      <path d="M3 3l18 18" />
-      <path d="M9.59 4.59A2 2 0 1 1 11 8H6" />
-      <path d="M17 11H8" />
+    <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+      <Paraglider />
+      <line
+        x1="3.5"
+        y1="20.5"
+        x2="20.5"
+        y2="3.5"
+        stroke="var(--off-soft)"
+        strokeWidth="3.6"
+        strokeLinecap="round"
+      />
+      <line
+        x1="3.5"
+        y1="20.5"
+        x2="20.5"
+        y2="3.5"
+        stroke="currentColor"
+        strokeWidth="1.8"
+        strokeLinecap="round"
+      />
     </svg>
   );
 };
@@ -138,6 +157,7 @@ export const SiteShow = ({
   forecast,
   windSpeedUnit,
   headerStatus,
+  isDemo = false,
 }: SiteShowProps): JSX.Element => {
   const range = effectiveSpeedRange(site, user);
   const windOverride =
@@ -148,16 +168,19 @@ export const SiteShow = ({
   return (
     <Layout
       title={`${site.name} — Windrose`}
-      name="sites"
+      name={isDemo ? "demo" : "sites"}
       user={user}
       csrfToken={csrfToken}
     >
       <div className="detail-header">
         <div className="detail-header-main">
           <p className="breadcrumb">
-            <a href="/sites">← All sites</a>
+            {isDemo ? <a href="/">← Home</a> : <a href="/sites">← All sites</a>}
           </p>
-          <h1 className="detail-title">{site.name}</h1>
+          <h1 className="detail-title">
+            {site.name}
+            {isDemo && <span className="demo-chip">Demo</span>}
+          </h1>
           <p className="detail-meta">
             <span className="arcs">{formatArcSummary(site.wind_arcs)}</span>
             <span className="dot">·</span>
@@ -181,21 +204,23 @@ export const SiteShow = ({
         </div>
         <div>
           <StatusCard status={headerStatus} />
-          <div className="detail-actions">
-            {site.club_url && (
-              <a
-                href={site.club_url}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="btn-ghost"
-              >
-                Club page ↗
+          {!isDemo && (
+            <div className="detail-actions">
+              {site.club_url && (
+                <a
+                  href={site.club_url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="btn-ghost"
+                >
+                  Club page ↗
+                </a>
+              )}
+              <a href={`/sites/${site.id}/edit`} className="btn-ghost">
+                Edit
               </a>
-            )}
-            <a href={`/sites/${site.id}/edit`} className="btn-ghost">
-              Edit
-            </a>
-          </div>
+            </div>
+          )}
         </div>
       </div>
 
@@ -276,7 +301,11 @@ export const SiteShow = ({
             <ForecastTabs
               days={forecast.days}
               selectedDayIndex={forecast.selectedDayIndex}
-              siteId={site.id}
+              basePath={
+                isDemo
+                  ? `/demo/${site.id.replace(/^demo-/, "")}`
+                  : `/sites/${site.id}`
+              }
               timezone={forecast.timezone}
               site={site}
               speedRange={effectiveSpeedRange(site, user)}
@@ -286,7 +315,14 @@ export const SiteShow = ({
             <div className="forecast-error">
               <p>Could not load the forecast right now.</p>
               <p className="text-tertiary">{forecast.error}</p>
-              <a href={`/sites/${site.id}`} className="btn-ghost">
+              <a
+                href={
+                  isDemo
+                    ? `/demo/${site.id.replace(/^demo-/, "")}`
+                    : `/sites/${site.id}`
+                }
+                className="btn-ghost"
+              >
                 Retry
               </a>
             </div>
@@ -300,7 +336,7 @@ export const SiteShow = ({
 interface ForecastTabsProps {
   days: ForecastDay[];
   selectedDayIndex: number;
-  siteId: string;
+  basePath: string;
   timezone: string;
   site: Site;
   speedRange: SpeedRange;
@@ -310,7 +346,7 @@ interface ForecastTabsProps {
 const ForecastTabs = ({
   days,
   selectedDayIndex,
-  siteId,
+  basePath,
   timezone,
   site,
   speedRange,
@@ -324,7 +360,7 @@ const ForecastTabs = ({
         {days.map((day, i) => (
           <a
             key={day.key}
-            href={`/sites/${siteId}?day=${i}`}
+            href={`${basePath}?day=${i}`}
             className={i === selectedDayIndex ? "active" : undefined}
             aria-current={i === selectedDayIndex ? "page" : undefined}
           >
@@ -359,13 +395,13 @@ const ForecastTabs = ({
             <thead>
               <tr>
                 <th>Time</th>
-                <th>Weather</th>
-                <th>Temp</th>
-                <th>Precip</th>
-                <th>Cloud</th>
+                <th>Direction</th>
                 <th>Wind</th>
                 <th>Gusts</th>
-                <th>Direction</th>
+                <th>Precip</th>
+                <th>Cloud</th>
+                <th>Temp</th>
+                <th>Weather</th>
               </tr>
             </thead>
             <tbody>
@@ -389,25 +425,6 @@ const ForecastTabs = ({
                       {formatHourLabel(hour.time, timezone)}
                     </td>
                     <td>
-                      <span
-                        className="weather-icon"
-                        role="img"
-                        title={info.label}
-                        aria-label={info.label}
-                      >
-                        {info.icon}
-                      </span>
-                    </td>
-                    <td>{Math.round(hour.temperatureC)}°C</td>
-                    <td>
-                      {hour.precipitationMm > 0
-                        ? `${hour.precipitationMm.toFixed(1)} mm`
-                        : `${Math.round(hour.precipitationProbability)}%`}
-                    </td>
-                    <td>{Math.round(hour.cloudCoverPercent)}%</td>
-                    <td>{formatWindSpeed(hour.windSpeedKph, windSpeedUnit)}</td>
-                    <td>{formatWindSpeed(hour.windGustsKph, windSpeedUnit)}</td>
-                    <td>
                       <div className="forecast-direction-cell">
                         <CompassRose
                           arcs={arcs}
@@ -420,6 +437,18 @@ const ForecastTabs = ({
                           {degreesToCardinal(hour.windDirectionDegrees)}
                         </span>
                       </div>
+                    </td>
+                    <td>{formatWindSpeed(hour.windSpeedKph, windSpeedUnit)}</td>
+                    <td>{formatWindSpeed(hour.windGustsKph, windSpeedUnit)}</td>
+                    <td>
+                      {hour.precipitationMm > 0
+                        ? `${hour.precipitationMm.toFixed(1)} mm`
+                        : `${Math.round(hour.precipitationProbability)}%`}
+                    </td>
+                    <td>{Math.round(hour.cloudCoverPercent)}%</td>
+                    <td>{Math.round(hour.temperatureC)}°C</td>
+                    <td>
+                      <WeatherIcon slug={info.iconSlug} label={info.label} />
                     </td>
                   </tr>
                 );

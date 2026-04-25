@@ -4,17 +4,28 @@ export function Logo() {
       xmlns="http://www.w3.org/2000/svg"
       width="24"
       height="24"
-      viewBox="0 0 24 24"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth="2"
-      strokeLinecap="round"
-      strokeLinejoin="round"
+      viewBox="-50 -50 100 100"
       aria-hidden="true"
     >
-      <path d="M12.8 19.6A2 2 0 1 0 14 16H2" />
-      <path d="M17.5 8a2.5 2.5 0 1 1 2 4H2" />
-      <path d="M9.8 4.4A2 2 0 1 1 11 8H2" />
+      <path
+        d="M0 -42 C 8 -26, 8 -10, 0 0 C -8 -10, -8 -26, 0 -42 Z"
+        fill="#2f80ff"
+      />
+      <path
+        d="M0 42 C 8 26, 8 10, 0 0 C -8 10, -8 26, 0 42 Z"
+        fill="#0a1730"
+        opacity="0.25"
+      />
+      <path
+        d="M-42 0 C -26 -8, -10 -8, 0 0 C -10 8, -26 8, -42 0 Z"
+        fill="#0a1730"
+        opacity="0.55"
+      />
+      <path
+        d="M42 0 C 26 -8, 10 -8, 0 0 C 10 8, 26 8, 42 0 Z"
+        fill="#0a1730"
+        opacity="0.55"
+      />
     </svg>
   );
 }

@@ -25,6 +25,7 @@
     "migrate:up": "bun run src/server/database/cli.ts up",
     "migrate:status": "bun run src/server/database/cli.ts status",
     "migrate:create": "bun run src/server/database/cli.ts create",
+    "images:generate": "bun run scripts/generate-images.ts",
     "prepare": "husky"
   },
   "devDependencies": {
@@ -41,6 +42,8 @@
     "typescript": "^5.9.3"
   },
   "dependencies": {
-    "resend": "^6.9.4"
+    "@meteocons/svg": "^0.1.0",
+    "resend": "^6.9.4",
+    "sharp": "^0.34.5"
   }
 }
