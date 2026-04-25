@@ -1,12 +1,8 @@
 [data-page="home"] {
-  main {
-    overflow: hidden;
-  }
-
   .hero {
     margin-left: calc(50% - 50vw);
-    padding: var(--s-8) max(var(--s-5), calc((100vw - var(--content-max)) / 2))
-      var(--s-9);
+    overflow: hidden;
+    padding: var(--s-8) var(--s-7) var(--s-9);
     position: relative;
     width: 100vw;
   }
