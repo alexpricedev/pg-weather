@@ -98,7 +98,6 @@ export function Layout({
           <Nav page={name} user={user} csrfToken={csrfToken} />
         </header>
         <main id="main">{children}</main>
-        <footer />
         <script type="module" src={getAssetUrl("/assets/main.js")} />
       </body>
     </html>
