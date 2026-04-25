@@ -8,11 +8,11 @@
   }
 
   .hero-grid {
-    align-items: end;
+    align-items: center;
     display: grid;
     gap: var(--s-7);
     grid-template-columns: 1fr 160px;
-    min-height: 70vh;
+    min-height: 480px;
     position: relative;
     z-index: 2;
   }
