@@ -150,10 +150,6 @@ export const Home = ({
         <HeroRose />
         <div className="hero-grid">
           <div className="hero-body">
-            <p className="eyebrow">
-              <span className="hero-dot" aria-hidden="true" />
-              Paragliding forecast
-            </p>
             <h1 id="hero-heading" className="hero-headline">
               Your launches.
               <br />

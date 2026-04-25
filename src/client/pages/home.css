@@ -37,27 +37,6 @@
     max-width: 640px;
   }
 
-  .eyebrow {
-    align-items: center;
-    color: var(--text-muted);
-    display: flex;
-    font-family: var(--font-mono);
-    font-size: 11px;
-    gap: var(--s-3);
-    letter-spacing: 0.14em;
-    margin: 0;
-    text-transform: uppercase;
-  }
-
-  .hero-dot {
-    background: var(--accent);
-    border-radius: 50%;
-    box-shadow: 0 0 0 4px color-mix(in oklab, var(--accent) 18%, transparent);
-    display: inline-block;
-    height: 6px;
-    width: 6px;
-  }
-
   .hero-headline {
     font-family: var(--font-display);
     font-size: clamp(3.25rem, 7vw, 6.5rem);
