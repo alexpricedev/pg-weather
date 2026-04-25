@@ -1,28 +1,542 @@
 [data-page="home"] {
-  .welcome {
-    padding: var(--s-9) 0;
-    text-align: center;
+  .hero {
+    margin-left: calc(50% - 50vw);
+    overflow: hidden;
+    padding: var(--s-8) var(--s-7) var(--s-9);
+    position: relative;
+    width: 100vw;
+  }
 
-    h1 {
-      font-size: clamp(2.4rem, 5vw, 3.25rem);
-      letter-spacing: -0.035em;
-      margin-bottom: var(--s-4);
+  .hero-grid {
+    align-items: center;
+    display: grid;
+    gap: var(--s-7);
+    grid-template-columns: 1fr 160px;
+    min-height: 480px;
+    position: relative;
+    z-index: 2;
+  }
+
+  .hero-meta {
+    align-items: flex-end;
+    border-top: 1px solid var(--border-strong);
+    color: var(--text-muted);
+    display: flex;
+    flex-direction: column;
+    font-family: var(--font-mono);
+    font-size: 11px;
+    gap: 10px;
+    letter-spacing: 0.14em;
+    padding-top: 12px;
+    text-align: right;
+    text-transform: uppercase;
+  }
+
+  .hero-body {
+    max-width: 640px;
+  }
+
+  .hero-headline {
+    font-family: var(--font-display);
+    font-size: clamp(2.5rem, 5vw, 4.5rem);
+    font-weight: 500;
+    letter-spacing: -0.035em;
+    line-height: 1.02;
+    margin: var(--s-5) 0 var(--s-5);
+  }
+
+  .hero-headline span {
+    color: var(--accent);
+  }
+
+  .lead {
+    color: var(--text-muted);
+    font-family: var(--font-body);
+    font-size: 1.125rem;
+    letter-spacing: -0.005em;
+    line-height: 1.5;
+    margin: 0 0 var(--s-6);
+    max-width: 52ch;
+  }
+
+  .hero-actions {
+    align-items: center;
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--s-3);
+  }
+
+  .hero-actions .btn-primary {
+    background: var(--alt-900);
+    border-color: var(--alt-900);
+    font-family: var(--font-mono);
+    font-size: 12px;
+    font-weight: 500;
+    gap: var(--s-3);
+    letter-spacing: 0.1em;
+    padding: 12px 18px;
+    text-transform: uppercase;
+  }
+
+  .hero-actions .btn-primary:hover,
+  .hero-actions .btn-primary:focus-visible {
+    background: var(--alt-800);
+    border-color: var(--alt-800);
+  }
+
+  .hero-actions .btn-ghost {
+    font-family: var(--font-mono);
+    font-size: 12px;
+    font-weight: 500;
+    letter-spacing: 0.1em;
+    padding: 12px 18px;
+    text-transform: uppercase;
+  }
+
+  .btn-arrow {
+    border-right: 1px solid currentColor;
+    border-top: 1px solid currentColor;
+    display: inline-block;
+    height: 10px;
+    transform: rotate(45deg);
+    width: 10px;
+  }
+
+  .stamp-accent {
+    color: var(--sky-600);
+  }
+
+  .hero-rose {
+    height: 640px;
+    opacity: 0.22;
+    pointer-events: none;
+    position: absolute;
+    right: -200px;
+    top: 40px;
+    width: 640px;
+    z-index: 1;
+  }
+
+  /* ----------------------------------------------------------------
+     Section chrome (shared across demo / how / why / faq sections)
+     ---------------------------------------------------------------- */
+  .home-section {
+    border-top: 1px solid var(--border);
+    padding: var(--s-8) 0;
+  }
+
+  .section-eyebrow {
+    color: var(--text-muted);
+    font-family: var(--font-mono);
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.14em;
+    margin: 0 0 var(--s-3);
+    text-transform: uppercase;
+  }
+
+  .section-heading {
+    font-family: var(--font-display);
+    font-size: clamp(1.75rem, 3vw, 2.25rem);
+    font-weight: 500;
+    letter-spacing: -0.025em;
+    line-height: 1.1;
+    margin: 0 0 var(--s-6);
+    max-width: 32ch;
+  }
+
+  /* ----------------------------------------------------------------
+     Demo cards row
+     ---------------------------------------------------------------- */
+  .demo-cards {
+    display: grid;
+    gap: var(--s-4);
+    grid-template-columns: repeat(3, 1fr);
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  .demo-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-md);
+    transition:
+      border-color 120ms ease,
+      transform 120ms ease;
+  }
+
+  .demo-card:hover,
+  .demo-card:focus-within {
+    border-color: var(--border-strong);
+    transform: translateY(-1px);
+  }
+
+  .demo-card-link {
+    color: inherit;
+    display: grid;
+    gap: var(--s-3);
+    grid-template-columns: auto 1fr;
+    padding: var(--s-4) var(--s-5);
+    text-decoration: none;
+  }
+
+  .demo-card-link:hover,
+  .demo-card-link:focus-visible {
+    color: inherit;
+    text-decoration: none;
+  }
+
+  .demo-card-rose {
+    align-items: center;
+    color: var(--text);
+    display: flex;
+    flex-shrink: 0;
+    justify-content: center;
+  }
+
+  .demo-card-body {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    min-width: 0;
+  }
+
+  .demo-card-name {
+    font-family: var(--font-display);
+    font-size: 18px;
+    font-weight: 500;
+    letter-spacing: -0.015em;
+    margin: 0;
+  }
+
+  .demo-card-meta {
+    margin: 0;
+  }
+
+  .demo-card-status {
+    border-radius: var(--radius-sm);
+    display: inline-block;
+    font-family: var(--font-mono);
+    font-size: 10.5px;
+    font-weight: 600;
+    letter-spacing: 0.14em;
+    padding: 4px 8px;
+    text-transform: uppercase;
+  }
+
+  .demo-card-status.is-now {
+    background: var(--accent-soft);
+    color: var(--accent);
+  }
+
+  .demo-card-status.is-soon {
+    background: var(--soon-soft);
+    color: var(--soon);
+  }
+
+  .demo-card-status.is-off {
+    background: var(--off-soft);
+    color: var(--off);
+  }
+
+  .demo-card-wind {
+    color: var(--text-muted);
+    font-family: var(--font-mono);
+    font-size: 11px;
+    font-variant-numeric: tabular-nums;
+    letter-spacing: 0.08em;
+    margin: 0;
+    text-transform: uppercase;
+  }
+
+  /* ----------------------------------------------------------------
+     How-it-works strip — instrument index, NOT icons-in-circles
+     ---------------------------------------------------------------- */
+  .how-steps {
+    display: grid;
+    gap: var(--s-5);
+    grid-template-columns: repeat(3, 1fr);
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    position: relative;
+  }
+
+  .how-step {
+    border-left: 1px solid var(--border);
+    padding-left: var(--s-5);
+  }
+
+  .how-step:first-child {
+    border-left: none;
+    padding-left: 0;
+  }
+
+  .how-step-num {
+    color: var(--text-muted);
+    display: block;
+    font-family: var(--font-mono);
+    font-size: clamp(48px, 6vw, 72px);
+    font-variant-numeric: tabular-nums;
+    font-weight: 500;
+    letter-spacing: -0.02em;
+    line-height: 1;
+    margin-bottom: var(--s-3);
+  }
+
+  .how-step-title {
+    font-family: var(--font-display);
+    font-size: 22px;
+    font-weight: 500;
+    letter-spacing: -0.02em;
+    margin: 0 0 var(--s-2);
+  }
+
+  .how-step-body {
+    color: var(--text-muted);
+    font-size: 15px;
+    line-height: 1.5;
+    margin: 0;
+    max-width: 32ch;
+  }
+
+  /* ----------------------------------------------------------------
+     Why not Windy — single paragraph, no card
+     ---------------------------------------------------------------- */
+  .why-body {
+    color: var(--text);
+    font-size: 1.125rem;
+    line-height: 1.55;
+    margin: 0;
+    max-width: 64ch;
+  }
+
+  .why-body em {
+    color: var(--accent);
+    font-style: normal;
+    font-weight: 500;
+  }
+
+  /* ----------------------------------------------------------------
+     FAQ — two-column grid (Q left 5/12, A right 7/12), stacks on mobile
+     ---------------------------------------------------------------- */
+  .faq-list {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+    margin: 0;
+  }
+
+  .faq-item {
+    border-top: 1px solid var(--border);
+    display: grid;
+    gap: var(--s-5);
+    grid-template-columns: 5fr 7fr;
+    padding: var(--s-5) 0;
+  }
+
+  .faq-item:first-child {
+    border-top: none;
+    padding-top: 0;
+  }
+
+  .faq-question {
+    color: var(--text);
+    font-family: var(--font-display);
+    font-size: 18px;
+    font-weight: 500;
+    letter-spacing: -0.015em;
+    line-height: 1.3;
+    margin: 0;
+  }
+
+  .faq-answer {
+    color: var(--text-muted);
+    font-size: 15px;
+    line-height: 1.55;
+    margin: 0;
+  }
+
+  .faq-answer a {
+    color: var(--accent);
+    text-decoration: underline;
+  }
+
+  /* ----------------------------------------------------------------
+     Home footer — open-meteo attribution + made-by line
+     ---------------------------------------------------------------- */
+  .home-footer {
+    align-items: baseline;
+    border-top: 1px solid var(--border);
+    color: var(--text-muted);
+    display: flex;
+    font-family: var(--font-mono);
+    font-size: 11px;
+    gap: var(--s-4);
+    justify-content: space-between;
+    letter-spacing: 0.14em;
+    padding: var(--s-5) 0;
+    text-transform: uppercase;
+  }
+
+  .home-footer p {
+    margin: 0;
+  }
+
+  .home-footer a {
+    color: var(--accent);
+    text-decoration: none;
+  }
+
+  .home-footer a:hover {
+    text-decoration: underline;
+  }
+}
+
+/* ------------------------------------------------------------------
+   DEMO chip + not-found page — scoped to /demo/:slug pages
+   ------------------------------------------------------------------ */
+[data-page="demo"] {
+  .demo-chip {
+    background: var(--accent-tint);
+    border-radius: var(--radius-sm);
+    color: var(--text);
+    display: inline-block;
+    font-family: var(--font-mono);
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.14em;
+    margin-left: var(--s-3);
+    padding: 4px 10px;
+    text-transform: uppercase;
+    vertical-align: middle;
+  }
+
+  .demo-not-found {
+    padding: var(--s-8) 0;
+  }
+
+  .demo-not-found-eyebrow {
+    color: var(--text-muted);
+    font-family: var(--font-mono);
+    font-size: 11px;
+    letter-spacing: 0.14em;
+    margin: 0 0 var(--s-3);
+    text-transform: uppercase;
+  }
+
+  .demo-not-found-headline {
+    font-family: var(--font-display);
+    font-size: clamp(2rem, 4vw, 3rem);
+    font-weight: 500;
+    letter-spacing: -0.035em;
+    line-height: 1;
+    margin: 0 0 var(--s-4);
+  }
+
+  .demo-not-found-lead {
+    color: var(--text-muted);
+    font-size: 1.125rem;
+    margin: 0 0 var(--s-5);
+    max-width: 48ch;
+  }
+
+  .demo-not-found-links {
+    display: flex;
+    flex-direction: column;
+    gap: var(--s-2);
+    list-style: none;
+    margin: 0 0 var(--s-6);
+    padding: 0;
+  }
+
+  .demo-not-found-links a {
+    color: var(--accent);
+    font-family: var(--font-mono);
+    font-size: 14px;
+    text-decoration: none;
+  }
+
+  .demo-not-found-links a:hover {
+    text-decoration: underline;
+  }
+
+  .demo-not-found-back {
+    margin: 0;
+  }
+}
+
+/* ------------------------------------------------------------------
+   Mobile breakpoints
+   ------------------------------------------------------------------ */
+@media (width <= 960px) {
+  [data-page="home"] {
+    .hero {
+      padding: var(--s-7) var(--s-4) var(--s-8);
     }
 
-    p {
-      color: var(--text-muted);
-      font-size: 1.0625rem;
-      line-height: 1.6;
-      margin: 0 auto var(--s-5);
-      max-width: 560px;
+    .hero-grid {
+      grid-template-columns: 1fr;
+      min-height: 0;
     }
 
-    .welcome-actions {
-      display: inline-flex;
+    .hero-meta {
+      align-items: flex-start;
+      flex-direction: row;
       flex-wrap: wrap;
-      gap: var(--s-3);
-      justify-content: center;
-      margin-top: var(--s-5);
+      gap: var(--s-4);
+      text-align: left;
+    }
+
+    .hero-rose {
+      height: 480px;
+      opacity: 0.35;
+      right: -180px;
+      top: 40px;
+      width: 480px;
+    }
+
+    .demo-cards {
+      grid-template-columns: 1fr;
+    }
+
+    .how-steps {
+      grid-template-columns: 1fr;
+    }
+
+    .how-step {
+      border-left: none;
+      border-top: 1px solid var(--border);
+      padding: var(--s-4) 0 0;
+    }
+
+    .how-step:first-child {
+      border-top: none;
+      padding-top: 0;
+    }
+
+    .faq-item {
+      grid-template-columns: 1fr;
+      gap: var(--s-2);
+    }
+  }
+}
+
+@media (width <= 640px) {
+  [data-page="home"] {
+    .hero-rose {
+      height: auto;
+      inset: 0;
+      opacity: 0.05;
+      right: 0;
+      top: 0;
+      width: 100%;
+    }
+
+    .home-footer {
+      flex-direction: column;
+      gap: var(--s-2);
     }
   }
 }

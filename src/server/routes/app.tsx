@@ -1,19 +1,12 @@
-import { forms, home, projects, settings, sites } from "../controllers/app";
+import { demo, home, settings, sitemap, sites } from "../controllers/app";
 import { callback, login, logout } from "../controllers/auth";
 import { createRouteHandler } from "../utils/route-handler";
 
 export const appRoutes = {
   "/": home.index,
-  "/forms": createRouteHandler({
-    GET: forms.index,
-    POST: forms.create,
-  }),
-  "/projects": createRouteHandler({
-    GET: projects.index,
-    POST: projects.create,
-  }),
-  "/projects/:id/delete": createRouteHandler({
-    POST: projects.destroy<"/projects/:id/delete">,
+  "/sitemap.xml": sitemap.show,
+  "/demo/:slug": createRouteHandler({
+    GET: demo.show<"/demo/:slug">,
   }),
   "/sites": createRouteHandler({
     GET: sites.index,

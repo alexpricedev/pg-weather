@@ -1,5 +1,6 @@
 import type { BunRequest } from "bun";
 import { getSessionContext } from "../../middleware/auth";
+import { getAllDemoCards } from "../../services/demos";
 import { setSessionCookie } from "../../services/sessions";
 import { Home } from "../../templates/home";
 import { redirect, render } from "../../utils/response";
@@ -16,6 +17,6 @@ export const home = {
       return redirect("/sites");
     }
 
-    return render(<Home user={ctx.user} />);
+    return render(<Home user={ctx.user} demoCards={getAllDemoCards()} />);
   },
 };

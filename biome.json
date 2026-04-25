@@ -50,7 +50,10 @@
       }
     },
     {
-      "includes": ["src/server/components/layouts.tsx"],
+      "includes": [
+        "src/server/components/layouts.tsx",
+        "src/server/components/weather-icon.tsx"
+      ],
       "linter": {
         "rules": {
           "security": {
@@ -60,7 +63,12 @@
       }
     },
     {
-      "includes": ["src/server/database/cli.ts", "src/server/database/seed.ts", "src/server/test-utils/bootstrap.ts"],
+      "includes": [
+        "src/server/database/cli.ts",
+        "src/server/database/seed.ts",
+        "src/server/test-utils/bootstrap.ts",
+        "scripts/**"
+      ],
       "linter": {
         "rules": {
           "suspicious": {

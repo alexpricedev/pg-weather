@@ -1,5 +1,5 @@
-export { forms } from "./forms";
+export { demo } from "./demo";
 export { home } from "./home";
-export { projects } from "./projects";
 export { settings } from "./settings";
+export { sitemap } from "./sitemap";
 export { sites } from "./sites";

@@ -15,11 +15,14 @@ export type SpeedRange = {
   maxGustKph: number | null;
 };
 
-export const effectiveSpeedRange = (site: Site, user: User): SpeedRange => ({
-  minWindKph: site.min_wind_speed_kph ?? user.min_wind_speed_kph,
-  maxWindKph: site.max_wind_speed_kph ?? user.max_wind_speed_kph,
-  minGustKph: site.min_wind_gust_kph ?? user.min_wind_gust_kph,
-  maxGustKph: site.max_wind_gust_kph ?? user.max_wind_gust_kph,
+export const effectiveSpeedRange = (
+  site: Site,
+  user: User | null,
+): SpeedRange => ({
+  minWindKph: site.min_wind_speed_kph ?? user?.min_wind_speed_kph ?? null,
+  maxWindKph: site.max_wind_speed_kph ?? user?.max_wind_speed_kph ?? null,
+  minGustKph: site.min_wind_gust_kph ?? user?.min_wind_gust_kph ?? null,
+  maxGustKph: site.max_wind_gust_kph ?? user?.max_wind_gust_kph ?? null,
 });
 
 export const hasAnyBound = (range: SpeedRange): boolean =>

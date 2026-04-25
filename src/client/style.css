@@ -1,7 +1,5 @@
 /* Page styles */
 @import "./pages/home.css";
-@import "./pages/forms.css";
-@import "./pages/projects.css";
 @import "./pages/login.css";
 @import "./pages/admin.css";
 @import "./pages/sites.css";
@@ -17,31 +15,56 @@
 @import "./components/compass-rose.css";
 
 :root {
+  /* Altitude — neutrals with a sky tilt */
+  --alt-000: #ffffff;
+  --alt-050: #f6f9fc;
+  --alt-100: #eaf1f8;
+  --alt-200: #d6e3f0;
+  --alt-300: #b6c8dc;
+  --alt-400: #8ea4bd;
+  --alt-500: #5f7a98;
+  --alt-600: #3e5775;
+  --alt-700: #27405e;
+  --alt-800: #16294a;
+  --alt-900: #0a1730;
+
+  /* Sky — signal ramp */
+  --sky-300: #8ec8ff;
+  --sky-400: #5aa6ff;
+  --sky-500: #2f80ff;
+  --sky-600: #1a5fd9;
+  --sky-700: #123f99;
+
+  /* Weather signals — map data only */
+  --signal-mint: #2fd6a1;
+  --signal-amber: #ffb547;
+  --signal-rose: #ff6b8a;
+
   /* Surfaces */
-  --bg: #f8f9fb;
-  --surface: #ffffff;
-  --surface-hover: #f1f4f8;
+  --bg: var(--alt-050);
+  --surface: var(--alt-000);
+  --surface-hover: var(--alt-100);
 
   /* Borders */
-  --border: #e4e7ed;
-  --border-strong: #cfd4dc;
+  --border: var(--alt-200);
+  --border-strong: var(--alt-300);
 
   /* Text */
-  --text: #0a0e14;
-  --text-muted: #556172;
-  --text-dim: #8a93a2;
+  --text: var(--alt-900);
+  --text-muted: var(--alt-500);
+  --text-dim: var(--alt-400);
 
-  /* Accent — sky #0369a1 (flyable, primary CTA, active nav, compass) */
-  --accent: #0369a1;
-  --accent-strong: #075985;
-  --accent-soft: #e0f0fa;
-  --accent-tint: #f3f9fd;
+  /* Accent — sky/500 (flyable, primary CTA, active nav, compass needle) */
+  --accent: var(--sky-500);
+  --accent-strong: var(--sky-600);
+  --accent-soft: #e6f0ff;
+  --accent-tint: #f2f7ff;
 
-  /* Soon — neutral slate */
-  --soon: #64748b;
-  --soon-soft: #eef1f5;
+  /* Soon — altitude/500 slate */
+  --soon: var(--alt-500);
+  --soon-soft: var(--alt-100);
 
-  /* Off — muted terracotta */
+  /* Off — muted terracotta, warm not alarmist */
   --off: #9e4a4a;
   --off-soft: #f7ebe8;
 
@@ -53,8 +76,11 @@
   --danger: #b3302d;
   --danger-soft: #f7ebe8;
 
-  /* Typography */
-  --font: "Satoshi", ui-sans-serif, system-ui, sans-serif;
+  /* Typography — three typefaces, one job each */
+  --font-display: "Space Grotesk", ui-sans-serif, system-ui, sans-serif;
+  --font-body: "Inter", ui-sans-serif, system-ui, sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
+  --font: var(--font-body);
 
   /* Spacing scale (4px base) */
   --s-1: 4px;
@@ -107,24 +133,26 @@ h3,
 h4,
 h5,
 h6 {
-  font-weight: 700;
+  font-family: var(--font-display);
+  font-weight: 500;
   letter-spacing: -0.02em;
-  line-height: 1.15;
+  line-height: 1.1;
   margin: 0 0 0.5em 0;
 }
 
 h1 {
   font-size: 2.2rem;
-  letter-spacing: -0.03em;
+  letter-spacing: -0.035em;
 }
 
 h2 {
-  font-size: 1.375rem;
-  letter-spacing: -0.025em;
+  font-size: 1.5rem;
+  letter-spacing: -0.03em;
 }
 
 h3 {
   font-size: 1.125rem;
+  letter-spacing: -0.015em;
 }
 
 p {
@@ -179,6 +207,23 @@ img {
 .tabular {
   font-feature-settings: "tnum";
   font-variant-numeric: tabular-nums;
+}
+
+.mono,
+.instrument {
+  font-family: var(--font-mono);
+  font-feature-settings: "tnum";
+  font-variant-numeric: tabular-nums;
+}
+
+/* Instrument-grade uppercase label — coords, stamps, micro-meta */
+.stamp {
+  color: var(--text-muted);
+  font-family: var(--font-mono);
+  font-size: 11px;
+  font-weight: 400;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
 }
 
 .card {
@@ -364,9 +409,10 @@ textarea {
 /* Eyebrow label — uppercase section/status labels */
 .eyebrow {
   color: var(--text-muted);
+  font-family: var(--font-mono);
   font-size: 11px;
-  font-weight: 600;
-  letter-spacing: 0.18em;
+  font-weight: 500;
+  letter-spacing: 0.14em;
   text-transform: uppercase;
 }
 

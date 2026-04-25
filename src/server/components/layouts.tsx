@@ -5,8 +5,9 @@ import type { User } from "../services/users";
 import { Logo } from "./logo";
 import { Nav } from "./nav";
 
-const SITE_URL = "http://localhost:3000";
-const SITE_DESCRIPTION = "Windrose — the paraglider's morning check.";
+const SITE_URL = process.env.SITE_URL ?? "http://localhost:3000";
+const SITE_DESCRIPTION =
+  "A flyability forecast for paragliders. Add the launches you fly, set the wind arcs that work, and get an honest hourly verdict for today, tomorrow, and the day after.";
 
 interface LayoutProps {
   title: string;
@@ -42,6 +43,7 @@ export function Layout({
         <meta name="twitter:title" content={title} />
         <meta name="twitter:description" content={SITE_DESCRIPTION} />
         <meta name="twitter:image" content={`${SITE_URL}/og-image.png`} />
+        <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
         <link
           rel="apple-touch-icon"
           sizes="180x180"
@@ -60,14 +62,15 @@ export function Layout({
           href="/favicon-16x16.png"
         />
         <link rel="manifest" href="/site.webmanifest" />
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link
           rel="preconnect"
-          href="https://api.fontshare.com"
+          href="https://fonts.gstatic.com"
           crossOrigin=""
         />
         <link
           rel="stylesheet"
-          href="https://api.fontshare.com/v2/css?f[]=satoshi@300,400,500,700,900&display=swap"
+          href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500;600&display=swap"
         />
         <link rel="stylesheet" href={getAssetUrl("/assets/main.css")} />
         <script
@@ -94,8 +97,7 @@ export function Layout({
           </a>
           <Nav page={name} user={user} csrfToken={csrfToken} />
         </header>
-        <main>{children}</main>
-        <footer />
+        <main id="main">{children}</main>
         <script type="module" src={getAssetUrl("/assets/main.js")} />
       </body>
     </html>
@@ -117,6 +119,7 @@ export function BaseLayout({ title, children }: BaseLayoutProps) {
           content="width=device-width, initial-scale=1, viewport-fit=cover"
         />
         <title>{title}</title>
+        <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
         <link
           rel="apple-touch-icon"
           sizes="180x180"
@@ -135,14 +138,15 @@ export function BaseLayout({ title, children }: BaseLayoutProps) {
           href="/favicon-16x16.png"
         />
         <link rel="manifest" href="/site.webmanifest" />
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link
           rel="preconnect"
-          href="https://api.fontshare.com"
+          href="https://fonts.gstatic.com"
           crossOrigin=""
         />
         <link
           rel="stylesheet"
-          href="https://api.fontshare.com/v2/css?f[]=satoshi@300,400,500,700,900&display=swap"
+          href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500;600&display=swap"
         />
         <link rel="stylesheet" href={getAssetUrl("/assets/main.css")} />
       </head>

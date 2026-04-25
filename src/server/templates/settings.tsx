@@ -1,7 +1,6 @@
 import type { JSX } from "react";
 import { CsrfField } from "../components/csrf-field";
 import { Flash } from "../components/flash";
-import { FormField } from "../components/form-field";
 import { Layout } from "../components/layouts";
 import type { User, WindSpeedUnit } from "../services/users";
 
@@ -88,67 +87,106 @@ export const Settings = ({
             <p className="text-tertiary settings-hint">
               A forecast hour counts as "fly" when the wind direction sits in an
               accepted arc and every set bound is satisfied. Leave any field
-              blank to skip that check. Values in {unitLabel}.
+              blank to skip that check. Values in {unitLabel}. These are your
+              defaults — you can override them on a per-site basis.
             </p>
-            <div className="settings-form-row">
-              <FormField label="Min wind speed" id="settings-min-wind">
-                <input
-                  id="settings-min-wind"
-                  name="min_wind_speed"
-                  type="number"
-                  min={0}
-                  step="0.5"
-                  defaultValue={values.min_wind_speed}
-                  placeholder="e.g. 10"
-                />
-                {errors.min_wind_speed && (
-                  <p className="field-error">{errors.min_wind_speed}</p>
-                )}
-              </FormField>
-              <FormField label="Max wind speed" id="settings-max-wind">
-                <input
-                  id="settings-max-wind"
-                  name="max_wind_speed"
-                  type="number"
-                  min={0}
-                  step="0.5"
-                  defaultValue={values.max_wind_speed}
-                  placeholder="e.g. 35"
-                />
-                {errors.max_wind_speed && (
-                  <p className="field-error">{errors.max_wind_speed}</p>
-                )}
-              </FormField>
-            </div>
-            <div className="settings-form-row">
-              <FormField label="Min gust" id="settings-min-gust">
-                <input
-                  id="settings-min-gust"
-                  name="min_wind_gust"
-                  type="number"
-                  min={0}
-                  step="0.5"
-                  defaultValue={values.min_wind_gust}
-                  placeholder="e.g. 15"
-                />
-                {errors.min_wind_gust && (
-                  <p className="field-error">{errors.min_wind_gust}</p>
-                )}
-              </FormField>
-              <FormField label="Max gust" id="settings-max-gust">
-                <input
-                  id="settings-max-gust"
-                  name="max_wind_gust"
-                  type="number"
-                  min={0}
-                  step="0.5"
-                  defaultValue={values.max_wind_gust}
-                  placeholder="e.g. 40"
-                />
-                {errors.max_wind_gust && (
-                  <p className="field-error">{errors.max_wind_gust}</p>
-                )}
-              </FormField>
+            <div className="range-grid">
+              <div className="range-grid-head" aria-hidden="true">
+                <span />
+                <span>Min</span>
+                <span>Max</span>
+                <span />
+              </div>
+
+              <div className="range-pair">
+                <span className="range-pair-label">Wind speed</span>
+                <div className="range-pair-input">
+                  <label
+                    htmlFor="settings-min-wind"
+                    className="range-pair-sublabel"
+                  >
+                    Min wind speed
+                  </label>
+                  <input
+                    id="settings-min-wind"
+                    name="min_wind_speed"
+                    type="number"
+                    min={0}
+                    step="0.5"
+                    defaultValue={values.min_wind_speed}
+                    placeholder="—"
+                  />
+                  {errors.min_wind_speed && (
+                    <p className="field-error">{errors.min_wind_speed}</p>
+                  )}
+                </div>
+                <div className="range-pair-input">
+                  <label
+                    htmlFor="settings-max-wind"
+                    className="range-pair-sublabel"
+                  >
+                    Max wind speed
+                  </label>
+                  <input
+                    id="settings-max-wind"
+                    name="max_wind_speed"
+                    type="number"
+                    min={0}
+                    step="0.5"
+                    defaultValue={values.max_wind_speed}
+                    placeholder="—"
+                  />
+                  {errors.max_wind_speed && (
+                    <p className="field-error">{errors.max_wind_speed}</p>
+                  )}
+                </div>
+                <span className="range-pair-unit">{unitLabel}</span>
+              </div>
+
+              <div className="range-pair">
+                <span className="range-pair-label">Gusts</span>
+                <div className="range-pair-input">
+                  <label
+                    htmlFor="settings-min-gust"
+                    className="range-pair-sublabel"
+                  >
+                    Min gust
+                  </label>
+                  <input
+                    id="settings-min-gust"
+                    name="min_wind_gust"
+                    type="number"
+                    min={0}
+                    step="0.5"
+                    defaultValue={values.min_wind_gust}
+                    placeholder="—"
+                  />
+                  {errors.min_wind_gust && (
+                    <p className="field-error">{errors.min_wind_gust}</p>
+                  )}
+                </div>
+                <div className="range-pair-input">
+                  <label
+                    htmlFor="settings-max-gust"
+                    className="range-pair-sublabel"
+                  >
+                    Max gust
+                  </label>
+                  <input
+                    id="settings-max-gust"
+                    name="max_wind_gust"
+                    type="number"
+                    min={0}
+                    step="0.5"
+                    defaultValue={values.max_wind_gust}
+                    placeholder="—"
+                  />
+                  {errors.max_wind_gust && (
+                    <p className="field-error">{errors.max_wind_gust}</p>
+                  )}
+                </div>
+                <span className="range-pair-unit">{unitLabel}</span>
+              </div>
             </div>
           </fieldset>
 
