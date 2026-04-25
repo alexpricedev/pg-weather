@@ -149,11 +149,6 @@ export const Home = ({
       <section className="hero" aria-labelledby="hero-heading">
         <HeroRose />
         <div className="hero-grid">
-          <div className="hero-stamp">
-            <span>Windrose</span>
-            <span>Identity system</span>
-            <span>2026</span>
-          </div>
           <div className="hero-body">
             <p className="eyebrow">
               <span className="hero-dot" aria-hidden="true" />

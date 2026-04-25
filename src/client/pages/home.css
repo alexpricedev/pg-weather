@@ -12,14 +12,14 @@
     align-items: end;
     display: grid;
     gap: var(--s-7);
-    grid-template-columns: 200px 1fr 200px;
+    grid-template-columns: 1fr 160px;
     min-height: 70vh;
     position: relative;
     z-index: 2;
   }
 
-  .hero-stamp,
   .hero-meta {
+    align-items: flex-end;
     border-top: 1px solid var(--border-strong);
     color: var(--text-muted);
     display: flex;
@@ -29,12 +29,8 @@
     gap: 10px;
     letter-spacing: 0.14em;
     padding-top: 12px;
-    text-transform: uppercase;
-  }
-
-  .hero-meta {
-    align-items: flex-end;
     text-align: right;
+    text-transform: uppercase;
   }
 
   .hero-body {
@@ -505,12 +501,6 @@
     .hero-grid {
       grid-template-columns: 1fr;
       min-height: 0;
-    }
-
-    .hero-stamp {
-      flex-direction: row;
-      flex-wrap: wrap;
-      gap: var(--s-4);
     }
 
     .hero-meta {
