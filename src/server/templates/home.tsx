@@ -152,7 +152,7 @@ export const Home = ({
           <div className="hero-body">
             <p className="eyebrow">
               <span className="hero-dot" aria-hidden="true" />
-              Windrose
+              Paragliding forecast
             </p>
             <h1 id="hero-heading" className="hero-headline">
               Your launches.
