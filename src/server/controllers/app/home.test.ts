@@ -46,9 +46,7 @@ describe("Home Controller", () => {
       ).text();
       expect(html).toContain("Your launches.");
       expect(html).toContain("Your limits.");
-      // Apostrophe is HTML-encoded as &#x27; — match either form.
-      expect(html).toMatch(/Today(?:&#x27;|&apos;|')s/);
-      expect(html).toContain("verdict");
+      expect(html).toMatch(/Fly\s+<span[^>]*>more<\/span>/);
     });
 
     test("renders both hero CTAs with correct hrefs", async () => {

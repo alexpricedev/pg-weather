@@ -155,7 +155,7 @@ export const Home = ({
               <br />
               Your limits.
               <br />
-              Today's <span>verdict</span>.
+              Fly <span>more</span>.
             </h1>
             <p className="lead">
               Add the launches you fly. Set the wind arcs that work for each
