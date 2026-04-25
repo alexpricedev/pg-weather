@@ -133,13 +133,13 @@
   }
 
   .hero-rose {
-    height: 720px;
-    opacity: 0.5;
+    height: 640px;
+    opacity: 0.22;
     pointer-events: none;
     position: absolute;
-    right: -160px;
-    top: 0;
-    width: 720px;
+    right: -200px;
+    top: 40px;
+    width: 640px;
     z-index: 1;
   }
 
