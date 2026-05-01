@@ -11,25 +11,27 @@
     align-items: center;
     display: grid;
     gap: var(--s-7);
-    grid-template-columns: 1fr 160px;
+    grid-template-columns: 1fr;
     min-height: 480px;
     position: relative;
     z-index: 2;
   }
 
-  .hero-meta {
-    align-items: flex-end;
-    border-top: 1px solid var(--border-strong);
-    color: var(--text-muted);
-    display: flex;
-    flex-direction: column;
-    font-family: var(--font-mono);
-    font-size: 11px;
-    gap: 10px;
-    letter-spacing: 0.14em;
-    padding-top: 12px;
-    text-align: right;
-    text-transform: uppercase;
+  .hero-preview {
+    border: 1px solid var(--border);
+    border-bottom: none;
+    border-radius: 6px 6px 0 0;
+    display: block;
+    height: auto;
+    mask-image: linear-gradient(to bottom, black 65%, transparent);
+    -webkit-mask-image: linear-gradient(to bottom, black 65%, transparent);
+    opacity: 0.55;
+    pointer-events: none;
+    position: absolute;
+    right: -240px;
+    top: 80px;
+    width: 880px;
+    z-index: 1;
   }
 
   .hero-body {
@@ -100,21 +102,6 @@
     height: 10px;
     transform: rotate(45deg);
     width: 10px;
-  }
-
-  .stamp-accent {
-    color: var(--sky-600);
-  }
-
-  .hero-rose {
-    height: 640px;
-    opacity: 0.22;
-    pointer-events: none;
-    position: absolute;
-    right: -200px;
-    top: 40px;
-    width: 640px;
-    z-index: 1;
   }
 
   /* ----------------------------------------------------------------
@@ -477,24 +464,16 @@
     }
 
     .hero-grid {
-      grid-template-columns: 1fr;
       min-height: 0;
     }
 
-    .hero-meta {
-      align-items: flex-start;
-      flex-direction: row;
-      flex-wrap: wrap;
-      gap: var(--s-4);
-      text-align: left;
-    }
-
-    .hero-rose {
-      height: 480px;
-      opacity: 0.35;
-      right: -180px;
-      top: 40px;
-      width: 480px;
+    .hero-preview {
+      margin-top: var(--s-6);
+      opacity: 0.85;
+      position: static;
+      right: auto;
+      top: auto;
+      width: 100%;
     }
 
     .demo-cards {
@@ -525,15 +504,6 @@
 
 @media (width <= 640px) {
   [data-page="home"] {
-    .hero-rose {
-      height: auto;
-      inset: 0;
-      opacity: 0.05;
-      right: 0;
-      top: 0;
-      width: 100%;
-    }
-
     .home-footer {
       flex-direction: column;
       gap: var(--s-2);

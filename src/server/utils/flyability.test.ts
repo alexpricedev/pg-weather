@@ -142,6 +142,20 @@ describe("isFlyableHour", () => {
     ).toBe(false);
   });
 
+  test("returns false when precipitation reaches the rain threshold", () => {
+    const range = effectiveSpeedRange(baseSite, baseUser);
+    expect(
+      isFlyableHour(hour({ precipitationMm: 0.1 }), baseSite, range, "UTC"),
+    ).toBe(false);
+  });
+
+  test("tolerates trace precipitation below the rain threshold", () => {
+    const range = effectiveSpeedRange(baseSite, baseUser);
+    expect(
+      isFlyableHour(hour({ precipitationMm: 0.05 }), baseSite, range, "UTC"),
+    ).toBe(true);
+  });
+
   test("returns true when arc + all speed/gust bounds pass", () => {
     const range = effectiveSpeedRange(baseSite, baseUser);
     expect(isFlyableHour(hour(), baseSite, range, "UTC")).toBe(true);

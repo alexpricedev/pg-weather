@@ -24,7 +24,7 @@ const HOW_STEPS: ReadonlyArray<{
   {
     num: "01",
     title: "Add a launch",
-    body: "Drop a pin for your site. Set the wind directions that work for that launch and the speed range you'll fly in.",
+    body: "Add a launch by name and coordinates. Set the wind arcs that work and the speed range you'll fly in.",
   },
   {
     num: "02",
@@ -33,8 +33,8 @@ const HOW_STEPS: ReadonlyArray<{
   },
   {
     num: "03",
-    title: "Green rows fly",
-    body: "Direction in arc, speed in range, no rain, daylight hours. Green means fly. That's the whole product.",
+    title: "See when it's flyable",
+    body: "Direction in arc, speed in range, no rain, daylight hours. See your personal forecast.",
   },
 ];
 
@@ -74,7 +74,19 @@ const FAQS: ReadonlyArray<{ q: string; a: JSX.Element }> = [
   },
   {
     q: "Is it open source?",
-    a: <>Yes, built in public. Source on GitHub.</>,
+    a: (
+      <>
+        Yes, built in public. Source on{" "}
+        <a
+          href="https://github.com/alexpricedev/pg-weather"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          GitHub
+        </a>
+        .
+      </>
+    ),
   },
   {
     q: "Do you have a mobile app?",
@@ -87,31 +99,13 @@ const FAQS: ReadonlyArray<{ q: string; a: JSX.Element }> = [
   },
 ];
 
-const HeroRose = (): JSX.Element => (
-  <svg className="hero-rose" viewBox="0 0 400 400" aria-hidden="true">
-    <defs>
-      <radialGradient id="hero-rose-fill" cx="50%" cy="50%" r="50%">
-        <stop offset="0%" stopColor="#5aa6ff" stopOpacity="0" />
-        <stop offset="70%" stopColor="#5aa6ff" stopOpacity="0.15" />
-        <stop offset="100%" stopColor="#5aa6ff" stopOpacity="0" />
-      </radialGradient>
-    </defs>
-    <circle cx="200" cy="200" r="200" fill="url(#hero-rose-fill)" />
-    <g stroke="#2f80ff" strokeWidth="0.5" fill="none" opacity="0.6">
-      <circle cx="200" cy="200" r="180" />
-      <circle cx="200" cy="200" r="140" />
-      <circle cx="200" cy="200" r="100" />
-      <circle cx="200" cy="200" r="60" />
-    </g>
-    <g fill="#123f99" opacity="0.85">
-      <polygon points="200,20 210,200 200,200 190,200" />
-      <polygon points="200,380 210,200 200,200 190,200" opacity="0.35" />
-      <polygon points="20,200 200,190 200,200 200,210" opacity="0.55" />
-      <polygon points="380,200 200,190 200,200 200,210" opacity="0.55" />
-    </g>
-    <circle cx="200" cy="200" r="6" fill="#123f99" />
-    <circle cx="200" cy="200" r="2" fill="#ffffff" />
-  </svg>
+const HeroPreviewImage = (): JSX.Element => (
+  <img
+    className="hero-preview"
+    src="/hero-preview.png"
+    alt=""
+    aria-hidden="true"
+  />
 );
 
 const DemoCard = ({ card }: { card: DemoCardEntry }): JSX.Element => (
@@ -147,7 +141,6 @@ export const Home = ({
   return (
     <Layout title="Windrose" name="home" user={user} csrfToken={csrfToken}>
       <section className="hero" aria-labelledby="hero-heading">
-        <HeroRose />
         <div className="hero-grid">
           <div className="hero-body">
             <h1 id="hero-heading" className="hero-headline">
@@ -159,7 +152,7 @@ export const Home = ({
             </h1>
             <p className="lead">
               Add the launches you fly. Set the wind arcs that work for each
-              one. Get an honest hourly verdict for the next 72 hours.
+              one. Instant clarity on the next 72 hours at every launch you fly.
             </p>
             <div className="hero-actions">
               <a href="/login" className="btn-primary">
@@ -173,14 +166,8 @@ export const Home = ({
               )}
             </div>
           </div>
-          <div className="hero-meta">
-            <span className="stamp">N 46°32'</span>
-            <span className="stamp">E 008°12'</span>
-            <span className="stamp">ALT 2400 m</span>
-            <span className="stamp">WIND 14 KPH</span>
-            <span className="stamp stamp-accent">VFR · GOOD</span>
-          </div>
         </div>
+        <HeroPreviewImage />
       </section>
 
       <section className="home-section" aria-labelledby="demos-heading">
@@ -239,7 +226,7 @@ export const Home = ({
       >
         <p className="section-eyebrow">FAQ</p>
         <h2 id="faq-heading" className="section-heading">
-          Asked enough times to answer in print.
+          Things people ask.
         </h2>
         <dl className="faq-list">
           {FAQS.map((item) => (
@@ -253,7 +240,15 @@ export const Home = ({
 
       <footer className="home-footer">
         <p className="home-footer-credit">
-          Made by paragliders · Windrose 2026
+          Made by{" "}
+          <a
+            href="https://alexprice.dev"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            Alex Price
+          </a>{" "}
+          · Windrose 2026
         </p>
         <p className="home-footer-attribution">
           Hourly data from{" "}

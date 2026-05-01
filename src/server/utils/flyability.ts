@@ -34,12 +34,18 @@ export const hasAnyBound = (range: SpeedRange): boolean =>
 export const FLYABLE_START_HOUR = 8;
 export const FLYABLE_END_HOUR = 18;
 
+// Open-Meteo's hourly precipitation can return trace values (~0.05mm) for
+// hours that are essentially dry, so we use a small threshold to filter
+// noise. Anything from light drizzle (≥0.1mm) up disqualifies the hour.
+export const RAIN_THRESHOLD_MM = 0.1;
+
 /**
  * An hour is flyable when it sits in the daylight window (08:00 ≤ local hour
  * < 18:00 — i.e. the 17:00 hour is the last flyable one, ending at 18:00),
- * wind direction sits in an accepted arc, AND every set bound is satisfied.
- * Null bounds are ignored. If no bounds are set at all, returns false so we
- * don't mark anything "go fly" without a preference.
+ * the forecast precipitation is below the rain threshold, wind direction sits
+ * in an accepted arc, AND every set bound is satisfied. Null bounds are
+ * ignored. If no bounds are set at all, returns false so we don't mark
+ * anything "go fly" without a preference.
  */
 export const isFlyableHour = (
   hour: ForecastHour,
@@ -51,6 +57,7 @@ export const isFlyableHour = (
   const localHour = hourOfDayInTimezone(hour.time, timezone);
   if (localHour < FLYABLE_START_HOUR || localHour >= FLYABLE_END_HOUR)
     return false;
+  if (hour.precipitationMm >= RAIN_THRESHOLD_MM) return false;
   if (!isDegreeInAnyArc(hour.windDirectionDegrees, site.wind_arcs))
     return false;
   if (range.minWindKph !== null && hour.windSpeedKph < range.minWindKph)
