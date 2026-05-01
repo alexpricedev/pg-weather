@@ -81,7 +81,7 @@ export const SitesIndex = ({
   state,
 }: SitesIndexProps): JSX.Element => (
   <Layout
-    title="Sites — Windrose"
+    title="Sites — Flyable Today"
     name="sites"
     user={user}
     csrfToken={csrfToken}

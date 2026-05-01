@@ -4,7 +4,7 @@ This file contains essential context and guidelines for Claude instances working
 
 **Key workflow reminders:**
 
-- The product is called **Windrose**. `pg-weather` is the repository / directory / `package.json` `name` slug only — never use it as a display name in user-facing copy, page titles, README, or marketing.
+- The product is called **Flyable Today**. `pg-weather` is the repository / directory / `package.json` `name` slug only — never use it as a display name in user-facing copy, page titles, README, or marketing.
 - Never try to run the local dev server. The Human is always running it in another tab on port 3000.
 - Always test your work with the /browse skill to confirm it works as expected.
 - This project uses JSX for it's template engine but it is NOT a React (client) project.
@@ -19,7 +19,7 @@ Always read `DESIGN.md` before making any visual or UI decisions. All font choic
 
 | Var | Default | Purpose |
 |---|---|---|
-| `SITE_URL` | `http://localhost:3000` | Origin used in OG meta tags + `sitemap.xml`. **Must be set in production** or social previews and the sitemap reference localhost. Set to e.g. `https://windrose.app`. |
+| `SITE_URL` | `http://localhost:3000` | Origin used in OG meta tags + `sitemap.xml`. **Must be set in production** or social previews and the sitemap reference localhost. Set to e.g. `https://flyable.today`. |
 | `DATABASE_URL` | — | Postgres connection string. Required at startup. |
 
 Other auth / email / pepper env vars are validated at startup (see `validateEnv` in `src/server/services/`). The startup error message names what's missing.

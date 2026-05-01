@@ -6,8 +6,9 @@ import { Logo } from "./logo";
 import { Nav } from "./nav";
 
 const SITE_URL = process.env.SITE_URL ?? "http://localhost:3000";
+const SITE_NAME = "Flyable Today";
 const SITE_DESCRIPTION =
-  "A flyability forecast for paragliders. Add the launches you fly, set the wind arcs that work, and get an honest hourly verdict for today, tomorrow, and the day after.";
+  "A flyability forecast for paragliders. Add the launches you fly, set the wind arcs that work, and get instant clarity on the next 72 hours.";
 
 interface LayoutProps {
   title: string;
@@ -34,15 +35,18 @@ export function Layout({
         />
         <title>{title}</title>
         <meta name="description" content={SITE_DESCRIPTION} />
+        <meta property="og:site_name" content={SITE_NAME} />
         <meta property="og:title" content={title} />
         <meta property="og:description" content={SITE_DESCRIPTION} />
         <meta property="og:image" content={`${SITE_URL}/og-image.png`} />
+        <meta property="og:image:alt" content={SITE_DESCRIPTION} />
         <meta property="og:url" content={SITE_URL} />
         <meta property="og:type" content="website" />
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:title" content={title} />
         <meta name="twitter:description" content={SITE_DESCRIPTION} />
         <meta name="twitter:image" content={`${SITE_URL}/og-image.png`} />
+        <meta name="twitter:image:alt" content={SITE_DESCRIPTION} />
         <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
         <link
           rel="apple-touch-icon"
@@ -93,7 +97,7 @@ export function Layout({
         <header>
           <a href="/" className="logo">
             <Logo />
-            <span>Windrose</span>
+            <span>Flyable Today</span>
           </a>
           <Nav page={name} user={user} csrfToken={csrfToken} />
         </header>

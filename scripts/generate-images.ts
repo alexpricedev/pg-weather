@@ -33,10 +33,30 @@ const APP_ICON_SVG = `<svg xmlns="http://www.w3.org/2000/svg" width="512" height
   </g>
 </svg>`;
 
-// OG/Twitter card. Text uses a system-font fallback because Space Grotesk
-// isn't embedded yet. To upgrade, base64-encode SpaceGrotesk-Medium.woff2 and
-// inject as @font-face in the <style> below.
-const OG_CARD_SVG = `<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630">
+// OG/Twitter card. Mirrors the home-page hero: text block on the left, the
+// dashboard preview faded behind it on the right (same mask + opacity treatment
+// as `.hero-preview` in src/client/pages/home.css). Text uses a system-font
+// fallback because Space Grotesk isn't embedded yet. To upgrade, base64-encode
+// SpaceGrotesk-Medium.woff2 and inject as @font-face in the <style> below.
+const buildOgCardSvg = (previewBase64: string): string => `<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630">
+  <defs>
+    <!-- Mirrors .hero-preview's mask-image: linear-gradient(to bottom, black 65%, transparent).
+         The mask spans only the preview's vertical band so the fade lands at the
+         bottom of the preview itself, not relative to the whole canvas. -->
+    <linearGradient id="preview-fade" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="white" stop-opacity="1"/>
+      <stop offset="40%" stop-color="white" stop-opacity="1"/>
+      <stop offset="100%" stop-color="white" stop-opacity="0"/>
+    </linearGradient>
+    <mask id="preview-mask">
+      <rect x="0" y="100" width="1200" height="490" fill="url(#preview-fade)"/>
+    </mask>
+    <linearGradient id="text-veil" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#f6f9fc" stop-opacity="1"/>
+      <stop offset="50%" stop-color="#f6f9fc" stop-opacity="0.95"/>
+      <stop offset="100%" stop-color="#f6f9fc" stop-opacity="0"/>
+    </linearGradient>
+  </defs>
   <style>
     .display { font-family: ui-sans-serif, system-ui, "Helvetica Neue", Arial, sans-serif; font-weight: 600; letter-spacing: -0.045em; fill: #0a1730; }
     .body    { font-family: ui-sans-serif, system-ui, "Helvetica Neue", Arial, sans-serif; font-weight: 400; fill: #5f7a98; }
@@ -44,6 +64,15 @@ const OG_CARD_SVG = `<svg xmlns="http://www.w3.org/2000/svg" width="1200" height
     .accent  { fill: #2f80ff; }
   </style>
   <rect width="1200" height="630" fill="#f6f9fc"/>
+
+  <!-- Dashboard preview, faded out at the bottom and behind the text column.
+       Smaller (760px) and shifted right (overflow ~280px) so the headline owns
+       the left half. Mirrors .hero-preview's mask + opacity in home.css. -->
+  <g opacity="0.55" mask="url(#preview-mask)">
+    <image href="data:image/png;base64,${previewBase64}" x="720" y="100" width="760" preserveAspectRatio="xMinYMin meet"/>
+  </g>
+  <!-- Veil so the text on the left stays legible over the preview. -->
+  <rect x="0" y="0" width="720" height="630" fill="url(#text-veil)"/>
 
   <!-- Brand row -->
   <g transform="translate(80, 96)">
@@ -53,37 +82,22 @@ const OG_CARD_SVG = `<svg xmlns="http://www.w3.org/2000/svg" width="1200" height
       <path d="M-42 0 C -26 -8, -10 -8, 0 0 C -10 8, -26 8, -42 0 Z" fill="#0a1730" opacity="0.55"/>
       <path d="M42 0 C 26 -8, 10 -8, 0 0 C 10 8, 26 8, 42 0 Z" fill="#0a1730" opacity="0.55"/>
     </g>
-    <text x="60" y="30" class="display" font-size="22" letter-spacing="-0.025em">Windrose</text>
+    <text x="60" y="30" class="display" font-size="22" letter-spacing="-0.025em">Flyable Today</text>
   </g>
 
-  <!-- Headline -->
+  <!-- Headline — mirrors .hero-headline -->
   <g transform="translate(80, 240)">
     <text x="0" y="0" class="display" font-size="76">Your launches.</text>
     <text x="0" y="92" class="display" font-size="76">Your limits.</text>
-    <text x="0" y="184" class="display" font-size="76">Today&#x27;s <tspan class="accent">verdict</tspan>.</text>
+    <text x="0" y="184" class="display" font-size="76">Fly <tspan class="accent">more</tspan>.</text>
   </g>
 
-  <!-- Subhead -->
-  <text x="80" y="540" class="body" font-size="24">A flyability forecast for paragliders. Built around your launches.</text>
-
-  <!-- Decorative compass top-right -->
-  <g transform="translate(960, 220)" opacity="0.5">
-    <circle cx="0" cy="0" r="180" fill="none" stroke="#2f80ff" stroke-width="0.8" opacity="0.6"/>
-    <circle cx="0" cy="0" r="140" fill="none" stroke="#2f80ff" stroke-width="0.8" opacity="0.45"/>
-    <circle cx="0" cy="0" r="100" fill="none" stroke="#2f80ff" stroke-width="0.8" opacity="0.3"/>
-    <circle cx="0" cy="0" r="60"  fill="none" stroke="#2f80ff" stroke-width="0.8" opacity="0.2"/>
-    <g fill="#123f99" opacity="0.85">
-      <polygon points="0,-180 10,0 0,0 -10,0"/>
-      <polygon points="0,180 10,0 0,0 -10,0" opacity="0.35"/>
-      <polygon points="-180,0 0,-10 0,0 0,10" opacity="0.55"/>
-      <polygon points="180,0 0,-10 0,0 0,10" opacity="0.55"/>
-    </g>
-    <circle cx="0" cy="0" r="6" fill="#123f99"/>
-    <circle cx="0" cy="0" r="2" fill="#ffffff"/>
-  </g>
+  <!-- Subhead — trimmed from .lead -->
+  <text x="80" y="510" class="body" font-size="22">Add the launches you fly. Set the wind arcs that work.</text>
+  <text x="80" y="544" class="body" font-size="22">Instant clarity on the next 72 hours.</text>
 
   <!-- Footer stamp -->
-  <text x="80" y="582" class="stamp" font-size="14">Windrose · windrose.app</text>
+  <text x="80" y="588" class="stamp" font-size="14">Flyable Today · flyable.today</text>
 </svg>`;
 
 const writeOne = async (
@@ -100,7 +114,13 @@ const writeOne = async (
 const main = async (): Promise<void> => {
   console.log(`Generating public/ images into ${PUBLIC_DIR}…`);
 
-  await writeOne(OG_CARD_SVG, "og-image.png", 1200, 630);
+  const previewBuffer = await sharp(resolve(PUBLIC_DIR, "hero-preview.png"))
+    .resize({ width: 760 })
+    .png({ quality: 85, compressionLevel: 9 })
+    .toBuffer();
+  const previewBase64 = previewBuffer.toString("base64");
+
+  await writeOne(buildOgCardSvg(previewBase64), "og-image.png", 1200, 630);
   await writeOne(APP_ICON_SVG, "favicon-16x16.png", 16, 16);
   await writeOne(APP_ICON_SVG, "favicon-32x32.png", 32, 32);
   await writeOne(APP_ICON_SVG, "apple-touch-icon.png", 180, 180);

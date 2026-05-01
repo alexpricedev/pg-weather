@@ -2,7 +2,7 @@
 
 ## CSRF Protection
 
-Windrose implements Cross-Site Request Forgery (CSRF) protection using the **synchronizer token pattern**.
+Flyable Today implements Cross-Site Request Forgery (CSRF) protection using the **synchronizer token pattern**.
 
 ### Key Features
 - **Per-session secrets** with HMAC-SHA256 tokens bound to method + path

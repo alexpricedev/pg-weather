@@ -167,7 +167,7 @@ export const SiteShow = ({
   const hasWindRange = range.minWindKph !== null || range.maxWindKph !== null;
   return (
     <Layout
-      title={`${site.name} — Windrose`}
+      title={`${site.name} — Flyable Today`}
       name={isDemo ? "demo" : "sites"}
       user={user}
       csrfToken={csrfToken}

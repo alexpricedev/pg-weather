@@ -139,7 +139,7 @@ export const Home = ({
     demoCards[0]?.slug ??
     "";
   return (
-    <Layout title="Windrose" name="home" user={user} csrfToken={csrfToken}>
+    <Layout title="Flyable Today" name="home" user={user} csrfToken={csrfToken}>
       <section className="hero" aria-labelledby="hero-heading">
         <div className="hero-grid">
           <div className="hero-body">
@@ -205,14 +205,14 @@ export const Home = ({
         className="home-section why-section"
         aria-labelledby="why-heading"
       >
-        <p className="section-eyebrow">WINDROSE vs WINDY</p>
+        <p className="section-eyebrow">FLYABLE TODAY vs WINDY</p>
         <h2 id="why-heading" className="section-heading">
-          Windy is the map. Windrose is the verdict.
+          Windy is the map. But is it Flyable Today?
         </h2>
         <p className="why-body">
           Windy is one of the best general-purpose weather apps in the world. We
           use it too. But it tells you what the atmosphere is doing — wind,
-          pressure, rain, everywhere on Earth. Windrose tells you whether{" "}
+          pressure, rain, everywhere on Earth. Flyable Today tells you whether{" "}
           <em>your</em> launch will fly, <em>today</em>, given <em>your</em>{" "}
           wind range. Add Forclaz once. Set the south-southwest arcs that work.
           Set the speed range that suits your wing. Every morning the answer is
@@ -248,7 +248,7 @@ export const Home = ({
           >
             Alex Price
           </a>{" "}
-          · Windrose 2026
+          · Flyable Today 2026
         </p>
         <p className="home-footer-attribution">
           Hourly data from{" "}

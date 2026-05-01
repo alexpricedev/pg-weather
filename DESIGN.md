@@ -1,8 +1,8 @@
-# Design System — Windrose
+# Design System — Flyable Today
 
 ## Product Context
 
-- **What this is:** Windrose is a paraglider's forecast planner. Add flying sites, set the wind direction arcs that launch each site, and check hourly forecasts for today, tomorrow, and the day after.
+- **What this is:** Flyable Today is a paraglider's forecast planner. Add flying sites, set the wind direction arcs that launch each site, and check hourly forecasts for today, tomorrow, and the day after.
 - **Who it's for:** Paraglider pilots deciding whether today's weather is flyable — typically checked first thing in the morning, often on a phone, with a driving decision on the line.
 - **Space/industry:** Weather tools for flying — category peers are Windy, XCWeather, Meteoblue, XCTrack, paragliding club sites.
 - **Project type:** Web app (dashboard-style with data-dense forecast tables and interactive instrument-like visuals).
@@ -155,7 +155,7 @@ Four streamline blades radiating from a shared centre on the N / S / E / W axes.
 - **Reversed on ink:** North uses `--sky-400`, E/W/S white at 0.55 / 0.55 / 0.30.
 - **On sky (photo-safe):** all four blades `--alt-900`, opacities 1.0 / 0.6 / 0.6 / 0.3.
 - **App icon:** the mark on a 20-radius rounded-square in `--alt-900` with the reversed-on-ink colourway.
-- **Clear space:** equal to the cap-height of "o" in Windrose on all sides.
+- **Clear space:** equal to the cap-height of "o" in Flyable Today on all sides.
 - **Wordmark pairing:** Space Grotesk Medium, tracking `-0.035em`.
 
 The mark is the only multi-colour surface in the UI chrome. It uses hardcoded fills — not `currentColor` — because blade weight is semantic, not decorative.

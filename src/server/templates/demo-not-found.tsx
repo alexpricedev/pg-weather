@@ -14,7 +14,7 @@ export const DemoNotFound = ({
   validSlugs,
 }: DemoNotFoundProps): JSX.Element => (
   <Layout
-    title="Sample not found — Windrose"
+    title="Sample not found — Flyable Today"
     name="demo"
     user={user}
     csrfToken={csrfToken}

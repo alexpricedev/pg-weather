@@ -45,7 +45,7 @@ export const Settings = ({
   const unitLabel = values.wind_speed_unit;
   return (
     <Layout
-      title="Settings — Windrose"
+      title="Settings — Flyable Today"
       name="settings"
       user={user}
       csrfToken={csrfToken}
