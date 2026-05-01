@@ -61,9 +61,7 @@ describe("Email Service", () => {
       const message = mockProvider.sentMessages[0];
       expect(message.html).toContain(data.magicLinkUrl);
       expect(message.html).toContain("10 minutes");
-      expect(message.html).toContain(
-        `Sign in to ${process.env.APP_NAME as string}`,
-      );
+      expect(message.html).toContain("Sign in to Flyable Today");
     });
 
     test("includes magic link URL in text content", async () => {
@@ -176,7 +174,7 @@ describe("Email Service", () => {
       const html = message.html;
 
       expect(html).toContain("<!DOCTYPE html>");
-      expect(html).toContain(process.env.APP_NAME as string);
+      expect(html).toContain("Flyable Today");
       expect(html).toContain("Sign in to your account");
       expect(html).toContain(data.magicLinkUrl);
       expect(html).toContain("20 minutes");
@@ -196,7 +194,7 @@ describe("Email Service", () => {
       expect(message.text).toBeDefined();
       const text = message.text as string;
 
-      expect(text).toContain(`Sign in to ${process.env.APP_NAME as string}`);
+      expect(text).toContain("Sign in to Flyable Today");
       expect(text).toContain(data.magicLinkUrl);
       expect(text).toContain("30 minutes");
       expect(text).toContain("If you didn't request this email");

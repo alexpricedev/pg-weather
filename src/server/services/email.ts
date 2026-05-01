@@ -43,49 +43,80 @@ export class EmailService {
   }
 
   private renderMagicLinkTemplate(data: MagicLinkEmailData): string {
-    return `
-<!DOCTYPE html>
-<html>
+    const displayFont = "'Space Grotesk', 'Helvetica Neue', Arial, sans-serif";
+    const bodyFont = "'Inter', 'Helvetica Neue', Helvetica, Arial, sans-serif";
+    const monoFont =
+      "'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, 'Courier New', monospace";
+
+    return `<!DOCTYPE html>
+<html lang="en">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Sign in to ${process.env.APP_NAME as string}</title>
+  <meta name="color-scheme" content="light">
+  <meta name="supported-color-schemes" content="light">
+  <title>Sign in to Flyable Today</title>
 </head>
-<body style="margin: 0; padding: 0; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; line-height: 1.6; color: #333;">
-  <div style="max-width: 600px; margin: 0 auto; padding: 40px 20px;">
-    <div style="text-align: center; margin-bottom: 40px;">
-      <h1 style="color: #2563eb; margin: 0;">${process.env.APP_NAME as string}</h1>
+<body style="margin:0;padding:0;background-color:#f6f9fc;font-family:${bodyFont};color:#0a1730;line-height:1.55;-webkit-font-smoothing:antialiased;">
+  <div style="max-width:560px;margin:0 auto;padding:48px 24px;">
+    <table role="presentation" cellpadding="0" cellspacing="0" border="0" style="border-collapse:collapse;margin-bottom:32px;">
+      <tr>
+        <td style="vertical-align:middle;padding-right:12px;line-height:0;">
+          <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="-50 -50 100 100" aria-hidden="true">
+            <path d="M0 -42 C 8 -26, 8 -10, 0 0 C -8 -10, -8 -26, 0 -42 Z" fill="#2f80ff"/>
+            <path d="M0 42 C 8 26, 8 10, 0 0 C -8 10, -8 26, 0 42 Z" fill="#0a1730" opacity="0.25"/>
+            <path d="M-42 0 C -26 -8, -10 -8, 0 0 C -10 8, -26 8, -42 0 Z" fill="#0a1730" opacity="0.55"/>
+            <path d="M42 0 C 26 -8, 10 -8, 0 0 C 10 8, 26 8, 42 0 Z" fill="#0a1730" opacity="0.55"/>
+          </svg>
+        </td>
+        <td style="vertical-align:middle;font-family:${displayFont};font-size:18px;font-weight:500;letter-spacing:-0.025em;color:#0a1730;">
+          Flyable Today
+        </td>
+      </tr>
+    </table>
+
+    <div style="height:1px;background-color:#d6e3f0;line-height:1px;font-size:1px;margin-bottom:32px;">&nbsp;</div>
+
+    <div style="font-family:${monoFont};font-size:11px;font-weight:500;letter-spacing:0.14em;text-transform:uppercase;color:#5f7a98;margin-bottom:12px;">
+      Magic link &middot; ${data.expiryMinutes} min
     </div>
-    
-    <div style="background: #f8fafc; padding: 30px; border-radius: 8px; margin-bottom: 30px;">
-      <h2 style="margin-top: 0; color: #1f2937;">Sign in to your account</h2>
-      <p style="margin-bottom: 30px; color: #4b5563;">
-        Click the button below to sign in to your account. This link will expire in ${data.expiryMinutes} minutes.
-      </p>
-      
-      <div style="text-align: center; margin: 30px 0;">
-        <a href="${data.magicLinkUrl}" 
-           style="display: inline-block; background: #2563eb; color: white; text-decoration: none; padding: 12px 30px; border-radius: 6px; font-weight: 500;">
-          Sign in to ${process.env.APP_NAME as string}
-        </a>
-      </div>
-      
-      <p style="margin-bottom: 0; color: #6b7280; font-size: 14px;">
-        If the button doesn't work, copy and paste this link into your browser:<br>
-        <a href="${data.magicLinkUrl}" style="color: #2563eb; word-break: break-all;">${data.magicLinkUrl}</a>
-      </p>
+
+    <h1 style="margin:0 0 16px 0;font-family:${displayFont};font-size:28px;font-weight:500;letter-spacing:-0.025em;color:#0a1730;line-height:1.2;">
+      Sign in to your account
+    </h1>
+
+    <p style="margin:0 0 32px 0;font-family:${bodyFont};font-size:15px;color:#27405e;letter-spacing:-0.005em;">
+      Tap the button to confirm it's you and we'll sign you in to Flyable Today. The link works once and expires in ${data.expiryMinutes} minutes.
+    </p>
+
+    <div style="margin:0 0 36px 0;">
+      <a href="${data.magicLinkUrl}" style="display:inline-block;background-color:#0a1730;color:#ffffff;text-decoration:none;font-family:${monoFont};font-size:12px;font-weight:500;letter-spacing:0.1em;text-transform:uppercase;padding:14px 22px;border-radius:4px;mso-padding-alt:0;">
+        Sign in to Flyable Today
+      </a>
     </div>
-    
-    <div style="text-align: center; color: #6b7280; font-size: 14px;">
-      <p>If you didn't request this email, you can safely ignore it.</p>
+
+    <div style="font-family:${monoFont};font-size:11px;font-weight:500;letter-spacing:0.14em;text-transform:uppercase;color:#5f7a98;margin-bottom:8px;">
+      Or paste this link
     </div>
+    <p style="margin:0 0 36px 0;font-family:${monoFont};font-size:12px;line-height:1.5;word-break:break-all;">
+      <a href="${data.magicLinkUrl}" style="color:#2f80ff;text-decoration:none;">${data.magicLinkUrl}</a>
+    </p>
+
+    <div style="height:1px;background-color:#d6e3f0;line-height:1px;font-size:1px;margin-bottom:20px;">&nbsp;</div>
+
+    <p style="margin:0 0 8px 0;font-family:${bodyFont};font-size:13px;color:#5f7a98;">
+      If you didn't request this email, you can safely ignore it.
+    </p>
+    <p style="margin:0;font-family:${monoFont};font-size:10.5px;font-weight:500;letter-spacing:0.14em;text-transform:uppercase;color:#8ea4bd;">
+      Flyable Today &middot; Personal three-day forecast for paragliders
+    </p>
   </div>
 </body>
 </html>`;
   }
 
   private renderMagicLinkText(data: MagicLinkEmailData): string {
-    return `Sign in to ${process.env.APP_NAME as string}
+    return `Sign in to Flyable Today
 
 Click the link below to sign in to your account:
 ${data.magicLinkUrl}

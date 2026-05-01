@@ -4,7 +4,6 @@ const REQUIRED = [
   "DATABASE_URL",
   "CRYPTO_PEPPER",
   "PORT",
-  "APP_NAME",
   "APP_URL",
   "EMAIL_PROVIDER",
   "FROM_EMAIL",
